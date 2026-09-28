@@ -1,0 +1,16 @@
+{"ts": "2026-09-28T12:09:34.060817+00:00", "type": "url_blocked", "url": "http://localhost:3000*", "reason": "out_of_scope"}
+{"ts": "2026-09-28T12:10:54.693553+00:00", "type": "request_sent", "url": "http://localhost:3000/rest/products/search?q=%27", "plugin": "SQLI-001", "payload_id": "sqli-single-quote", "blocked": false}
+{"ts": "2026-09-28T12:10:54.917538+00:00", "type": "request_sent", "url": "http://localhost:3000/rest/products/search?q=%27--", "plugin": "SQLI-001", "payload_id": "sqli-comment", "blocked": false}
+{"ts": "2026-09-28T12:10:55.094546+00:00", "type": "request_sent", "url": "http://localhost:3000/rest/products/search?q=%27+OR+%271%27%3D%271", "plugin": "SQLI-001", "payload_id": "sqli-or-true", "blocked": false}
+{"ts": "2026-09-28T12:10:55.322412+00:00", "type": "request_sent", "url": "http://localhost:3000/rest/products/search?q=1+ORDER+BY+100--", "plugin": "SQLI-001", "payload_id": "sqli-order", "blocked": false}
+{"ts": "2026-09-28T12:10:55.493560+00:00", "type": "request_sent", "url": "http://localhost:3000/api/Users/?name=%27", "plugin": "SQLI-001", "payload_id": "sqli-single-quote", "blocked": false}
+{"ts": "2026-09-28T12:10:55.709858+00:00", "type": "request_sent", "url": "http://localhost:3000/api/Users/?name=%27--", "plugin": "SQLI-001", "payload_id": "sqli-comment", "blocked": false}
+{"ts": "2026-09-28T12:10:55.928024+00:00", "type": "request_sent", "url": "http://localhost:3000/api/Users/?name=%27+OR+%271%27%3D%271", "plugin": "SQLI-001", "payload_id": "sqli-or-true", "blocked": false}
+{"ts": "2026-09-28T12:10:56.093919+00:00", "type": "request_sent", "url": "http://localhost:3000/api/Users/?name=1+ORDER+BY+100--", "plugin": "SQLI-001", "payload_id": "sqli-order", "blocked": false}
+{"ts": "2026-09-28T12:10:56.319117+00:00", "type": "request_sent", "url": "http://localhost:3000/rest/products/search?q=DAST-CANARY-4ad4f56d413f", "plugin": "XSS-001", "payload_id": "xss-canary", "blocked": false}
+{"ts": "2026-09-28T12:10:56.488816+00:00", "type": "request_sent", "url": "http://localhost:3000/api/Users/?name=DAST-CANARY-f04ad04502a4", "plugin": "XSS-001", "payload_id": "xss-canary", "blocked": false}
+{"ts": "2026-09-28T12:11:25.954536+00:00", "type": "request_sent", "url": "http://localhost:3000/api/Users/?name=%27", "plugin": "SQLI-001", "payload_id": "sqli-single-quote", "blocked": false}
+{"ts": "2026-09-28T12:11:26.122377+00:00", "type": "request_sent", "url": "http://localhost:3000/api/Users/?name=%27--", "plugin": "SQLI-001", "payload_id": "sqli-comment", "blocked": false}
+{"ts": "2026-09-28T12:11:26.333284+00:00", "type": "request_sent", "url": "http://localhost:3000/api/Users/?name=%27+OR+%271%27%3D%271", "plugin": "SQLI-001", "payload_id": "sqli-or-true", "blocked": false}
+{"ts": "2026-09-28T12:11:26.548315+00:00", "type": "request_sent", "url": "http://localhost:3000/api/Users/?name=1+ORDER+BY+100--", "plugin": "SQLI-001", "payload_id": "sqli-order", "blocked": false}
+{"ts": "2026-09-28T12:11:26.771625+00:00", "type": "request_sent", "url": "http://localhost:3000/api/Users/?name=DAST-CANARY-45bfd9120b8c", "plugin": "XSS-001", "payload_id": "xss-canary", "blocked": false}

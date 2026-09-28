@@ -1,0 +1,1491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DAST Report — scan-002</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, "Segoe UI", system-ui, sans-serif; font-size: 14px;
+         line-height: 1.6; background: #fff; color: #1f2328; }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 32px 24px; }
+  h1 { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+  h2 { font-size: 17px; font-weight: 600; margin: 28px 0 12px; border-bottom: 1px solid #e5e7eb; padding-bottom: 6px; }
+  h3 { font-size: 14px; font-weight: 600; margin: 18px 0 6px; }
+  p, li { margin-bottom: 6px; }
+  a { color: #3b82d4; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .muted { color: #57606a; font-size: 12px; }
+  .surface { background: #f7f8fa; border: 1px solid #e5e7eb; border-radius: 6px; padding: 16px; margin-bottom: 12px; }
+  /* Score strip */
+  .score-strip { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; }
+  .score-card { flex: 1 1 120px; background: #f7f8fa; border: 1px solid #e5e7eb;
+                border-radius: 8px; padding: 16px; text-align: center; }
+  .score-card .num { font-size: 32px; font-weight: 700; }
+  .score-card .label { font-size: 11px; color: #57606a; text-transform: uppercase; letter-spacing: .04em; }
+  /* Severity badges */
+  .badge { display: inline-block; padding: 1px 8px; border-radius: 10px;
+           font-size: 11px; font-weight: 600; text-transform: uppercase; vertical-align: middle; }
+  .critical { background: #fde8e8; color: #b91c1c; }
+  .high     { background: #fff3e0; color: #c2410c; }
+  .medium   { background: #fef9c3; color: #92400e; }
+  .low      { background: #e0f2fe; color: #0369a1; }
+  .info     { background: #f0fdf4; color: #166534; }
+  /* Validation level badges */
+  .vl0 { background: #f1f5f9; color: #475569; }
+  .vl1 { background: #fef9c3; color: #92400e; }
+  .vl2 { background: #dcfce7; color: #166534; }
+  /* Table */
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { background: #f7f8fa; border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; font-weight: 600; }
+  td { border: 1px solid #e5e7eb; padding: 8px 10px; vertical-align: top; }
+  tr:hover td { background: #fafafa; }
+  /* Code block */
+  pre { background: #161b22; color: #e6edf3; border-radius: 6px; padding: 14px;
+        font-size: 12px; overflow-x: auto; white-space: pre-wrap; word-break: break-all; margin: 8px 0; }
+  /* Finding card */
+  .finding-card { border-left: 4px solid #e5e7eb; margin-bottom: 20px; padding-left: 14px; }
+  .finding-card.critical { border-color: #b91c1c; }
+  .finding-card.high     { border-color: #c2410c; }
+  .finding-card.medium   { border-color: #d97706; }
+  .finding-card.low      { border-color: #0369a1; }
+  .finding-title { font-weight: 600; margin-bottom: 4px; }
+  details summary { cursor: pointer; color: #3b82d4; font-size: 12px; margin-top: 6px; }
+  footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid #e5e7eb;
+           text-align: center; font-size: 12px; color: #57606a; }
+  @media (max-width:600px) { .score-strip { flex-direction: column; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>🔍 DAST Security Report</h1>
+  <p class="muted">Scan ID: scan-002 &nbsp;·&nbsp; Target: <a href="http://localhost:3000">http://localhost:3000</a>
+  &nbsp;·&nbsp; Started: 2026-09-28 12:11:23 UTC
+  &nbsp;·&nbsp; URLs crawled: 8</p>
+
+  
+  <p class="muted" style="margin-top:4px;">
+    Stack detected:
+    
+    
+  </p>
+  
+
+  <!-- Executive Summary -->
+  <h2>Executive Summary</h2>
+
+  
+  
+
+  <div class="score-strip">
+    <div class="score-card"><div class="num" style="color:#b91c1c">0</div><div class="label">Critical</div></div>
+    <div class="score-card"><div class="num" style="color:#c2410c">0</div><div class="label">High</div></div>
+    <div class="score-card"><div class="num" style="color:#d97706">35</div><div class="label">Medium</div></div>
+    <div class="score-card"><div class="num" style="color:#0369a1">1</div><div class="label">Low</div></div>
+    <div class="score-card"><div class="num">36</div><div class="label">Total</div></div>
+  </div>
+
+  
+  <h3>Top Priorities</h3>
+  <ol>
+    
+    <li><span class="badge medium">medium</span>
+        <strong>Missing header: Content-Security-Policy</strong> — http://localhost:3000</li>
+    
+    <li><span class="badge medium">medium</span>
+        <strong>Missing header: Strict-Transport-Security</strong> — http://localhost:3000</li>
+    
+    <li><span class="badge medium">medium</span>
+        <strong>Missing header: Referrer-Policy</strong> — http://localhost:3000</li>
+    
+  </ol>
+  
+
+  <!-- Developer View -->
+  <h2>Findings by Endpoint</h2>
+
+  
+  <div style="margin-bottom:24px;">
+    <h3 style="word-break:break-all">http://localhost:3000</h3>
+    
+    <div class="finding-card medium">
+      <div class="finding-title">
+        <span class="badge medium">medium</span>
+        <span class="badge vl1">
+          Level 1:
+          Signature
+        </span>
+        &nbsp;Missing header: Content-Security-Policy
+        <span class="muted">&nbsp;CWE-693 / A05:2021</span>
+      </div>
+      <p style="margin-top:6px;color:#57606a;font-size:13px;"></p>
+      
+      
+      <details>
+        <summary>▶ Evidence</summary>
+        <pre>{
+  "response_headers": "Access-Control-Allow-Origin: *\nX-Content-Type-Options: nosniff\nX-Frame-Options: SAMEORIGIN\nFeature-Policy: payment 'self'\nX-Recruiting: /#/jobs\nAccept-Ranges: bytes\nCache-Control: public, max-age=0\nLast-Modified: Mon, 28 Sep 2026 12:06:25 GMT\nETag: W/\"24b1-1a0e7e8c195\"\nContent-Type: text/html; charset=UTF-8\nVary: Accept-Encoding\nContent-Encoding: gzip\nDate: Mon, 28 Sep 2026 12:11:24 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\nTransfer-Encoding: chunked"
+}</pre>
+      </details>
+      
+      <details>
+        <summary>▶ Remediation</summary>
+        <p style="padding:8px 0;">Add a Content-Security-Policy header to restrict resource loading. Start with 'default-src \'self\''. Ref: https://owasp.org/www-project-secure-headers/</p>
+      </details>
+    </div>
+    
+    <div class="finding-card medium">
+      <div class="finding-title">
+        <span class="badge medium">medium</span>
+        <span class="badge vl1">
+          Level 1:
+          Signature
+        </span>
+        &nbsp;Missing header: Strict-Transport-Security
+        <span class="muted">&nbsp;CWE-693 / A05:2021</span>
+      </div>
+      <p style="margin-top:6px;color:#57606a;font-size:13px;"></p>
+      
+      
+      <details>
+        <summary>▶ Evidence</summary>
+        <pre>{
+  "response_headers": "Access-Control-Allow-Origin: *\nX-Content-Type-Options: nosniff\nX-Frame-Options: SAMEORIGIN\nFeature-Policy: payment 'self'\nX-Recruiting: /#/jobs\nAccept-Ranges: bytes\nCache-Control: public, max-age=0\nLast-Modified: Mon, 28 Sep 2026 12:06:25 GMT\nETag: W/\"24b1-1a0e7e8c195\"\nContent-Type: text/html; charset=UTF-8\nVary: Accept-Encoding\nContent-Encoding: gzip\nDate: Mon, 28 Sep 2026 12:11:24 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\nTransfer-Encoding: chunked"
+}</pre>
+      </details>
+      
+      <details>
+        <summary>▶ Remediation</summary>
+        <p style="padding:8px 0;">Add 'Strict-Transport-Security: max-age=31536000; includeSubDomains' to enforce HTTPS.</p>
+      </details>
+    </div>
+    
+    <div class="finding-card medium">
+      <div class="finding-title">
+        <span class="badge medium">medium</span>
+        <span class="badge vl1">
+          Level 1:
+          Signature
+        </span>
+        &nbsp;Missing header: Referrer-Policy
+        <span class="muted">&nbsp;CWE-693 / A05:2021</span>
+      </div>
+      <p style="margin-top:6px;color:#57606a;font-size:13px;"></p>
+      
+      
+      <details>
+        <summary>▶ Evidence</summary>
+        <pre>{
+  "response_headers": "Access-Control-Allow-Origin: *\nX-Content-Type-Options: nosniff\nX-Frame-Options: SAMEORIGIN\nFeature-Policy: payment 'self'\nX-Recruiting: /#/jobs\nAccept-Ranges: bytes\nCache-Control: public, max-age=0\nLast-Modified: Mon, 28 Sep 2026 12:06:25 GMT\nETag: W/\"24b1-1a0e7e8c195\"\nContent-Type: text/html; charset=UTF-8\nVary: Accept-Encoding\nContent-Encoding: gzip\nDate: Mon, 28 Sep 2026 12:11:24 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\nTransfer-Encoding: chunked"
+}</pre>
+      </details>
+      
+      <details>
+        <summary>▶ Remediation</summary>
+        <p style="padding:8px 0;">Add 'Referrer-Policy: no-referrer' or 'strict-origin-when-cross-origin'.</p>
+      </details>
+    </div>
+    
+    <div class="finding-card medium">
+      <div class="finding-title">
+        <span class="badge medium">medium</span>
+        <span class="badge vl1">
+          Level 1:
+          Signature
+        </span>
+        &nbsp;Missing header: Permissions-Policy
+        <span class="muted">&nbsp;CWE-693 / A05:2021</span>
+      </div>
+      <p style="margin-top:6px;color:#57606a;font-size:13px;"></p>
+      
+      
+      <details>
+        <summary>▶ Evidence</summary>
+        <pre>{
+  "response_headers": "Access-Control-Allow-Origin: *\nX-Content-Type-Options: nosniff\nX-Frame-Options: SAMEORIGIN\nFeature-Policy: payment 'self'\nX-Recruiting: /#/jobs\nAccept-Ranges: bytes\nCache-Control: public, max-age=0\nLast-Modified: Mon, 28 Sep 2026 12:06:25 GMT\nETag: W/\"24b1-1a0e7e8c195\"\nContent-Type: text/html; charset=UTF-8\nVary: Accept-Encoding\nContent-Encoding: gzip\nDate: Mon, 28 Sep 2026 12:11:24 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\nTransfer-Encoding: chunked"
+}</pre>
+      </details>
+      
+      <details>
+        <summary>▶ Remediation</summary>
+        <p style="padding:8px 0;">Add a Permissions-Policy header to restrict browser feature access.</p>
+      </details>
+    </div>
+    
+    <div class="finding-card low">
+      <div class="finding-title">
+        <span class="badge low">low</span>
+        <span class="badge vl1">
+          Level 1:
+          Signature
+        </span>
+        &nbsp;HTML comment with potentially sensitive content
+        <span class="muted">&nbsp;CWE-200 / A02:2021</span>
+      </div>
+      <p style="margin-top:6px;color:#57606a;font-size:13px;">Exposed internal information assists attackers in targeting further attacks with knowledge of technology stack, credentials, or paths.</p>
+      
+      <details>
+        <summary>▶ Reproduction</summary>
+        <pre>curl 'http://localhost:3000'  # inspect the response body</pre>
+      </details>
+      
+      
+      <details>
+        <summary>▶ Evidence</summary>
+        <pre>{
+  "matched_pattern": "(?i)(<!--.*?--\\s*>)",
+  "response_excerpt": "<!--\n  ~ Copyright (c) 2014-2026 Bjoern Kimminich & the OWASP Juice Shop contributors.\n  ~ SPDX-License-Identifier: MIT\n  -->\n\n<!doctype html>\n<html lang=\"en\" data-beasties-container>\n<head>\n  <meta charset=\"utf-8\">\n  <title>OWASP Juice Shop</title>\n  <meta name=\"description"
+}</pre>
+      </details>
+      
+      <details>
+        <summary>▶ Remediation</summary>
+        <p style="padding:8px 0;">Review and remove HTML comments containing internal paths, version numbers, or developer notes before deploying to production.</p>
+      </details>
+    </div>
+    
+  </div>
+  
+  <div style="margin-bottom:24px;">
+    <h3 style="word-break:break-all">http://localhost:3000/api/Users/?name=test</h3>
+    
+    <div class="finding-card medium">
+      <div class="finding-title">
+        <span class="badge medium">medium</span>
+        <span class="badge vl1">
+          Level 1:
+          Signature
+        </span>
+        &nbsp;Missing header: Content-Security-Policy
+        <span class="muted">&nbsp;CWE-693 / A05:2021</span>
+      </div>
+      <p style="margin-top:6px;color:#57606a;font-size:13px;"></p>
+      
+      
+      <details>
+        <summary>▶ Evidence</summary>
+        <pre>{
+  "response_headers": "Access-Control-Allow-Origin: *\nX-Content-Type-Options: nosniff\nX-Frame-Options: SAMEORIGIN\nFeature-Policy: payment 'self'\nX-Recruiting: /#/jobs\nContent-Type: text/html; charset=utf-8\nVary: Accept-Encoding\nDate: Mon, 28 Sep 2026 12:11:24 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\nTransfer-Encoding: chunked"
+}</pre>
+      </details>
+      
+      <details>
+        <summary>▶ Remediation</summary>
+        <p style="padding:8px 0;">Add a Content-Security-Policy header to restrict resource loading. Start with 'default-src \'self\''. Ref: https://owasp.org/www-project-secure-headers/</p>
+      </details>
+    </div>
+    
+    <div class="finding-card medium">
+      <div class="finding-title">
+        <span class="badge medium">medium</span>
+        <span class="badge vl1">
+          Level 1:
+          Signature
+        </span>
+        &nbsp;Missing header: Strict-Transport-Security
+        <span class="muted">&nbsp;CWE-693 / A05:2021</span>
+      </div>
+      <p style="margin-top:6px;color:#57606a;font-size:13px;"></p>
+      
+      
+      <details>
+        <summary>▶ Evidence</summary>
+        <pre>{
+  "response_headers": "Access-Control-Allow-Origin: *\nX-Content-Type-Options: nosniff\nX-Frame-Options: SAMEORIGIN\nFeature-Policy: payment 'self'\nX-Recruiting: /#/jobs\nContent-Type: text/html; charset=utf-8\nVary: Accept-Encoding\nDate: Mon, 28 Sep 2026 12:11:24 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\nTransfer-Encoding: chunked"
+}</pre>
+      </details>
+      
+      <details>
+        <summary>▶ Remediation</summary>
+        <p style="padding:8px 0;">Add 'Strict-Transport-Security: max-age=31536000; includeSubDomains' to enforce HTTPS.</p>
+      </details>
+    </div>
+    
+    <div class="finding-card medium">
+      <div class="finding-title">
+        <span class="badge medium">medium</span>
+        <span class="badge vl1">
+          Level 1:
+          Signature
+        </span>
+        &nbsp;Missing header: Referrer-Policy
+        <span class="muted">&nbsp;CWE-693 / A05:2021</span>
+      </div>
+      <p style="margin-top:6px;color:#57606a;font-size:13px;"></p>
+      
+      
+      <details>
+        <summary>▶ Evidence</summary>
+        <pre>{
+  "response_headers": "Access-Control-Allow-Origin: *\nX-Content-Type-Options: nosniff\nX-Frame-Options: SAMEORIGIN\nFeature-Policy: payment 'self'\nX-Recruiting: /#/jobs\nContent-Type: text/html; charset=utf-8\nVary: Accept-Encoding\nDate: Mon, 28 Sep 2026 12:11:24 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\nTransfer-Encoding: chunked"
+}</pre>
+      </details>
+      
+      <details>
+        <summary>▶ Remediation</summary>
+        <p style="padding:8px 0;">Add 'Referrer-Policy: no-referrer' or 'strict-origin-when-cross-origin'.</p>
+      </details>
+    </div>
+    
+    <div class="finding-card medium">
+      <div class="finding-title">
+        <span class="badge medium">medium</span>
+        <span class="badge vl1">
+          Level 1:
+          Signature
+        </span>
+        &nbsp;Missing header: Permissions-Policy
+        <span class="muted">&nbsp;CWE-693 / A05:2021</span>
+      </div>
+      <p style="margin-top:6px;color:#57606a;font-size:13px;"></p>
+      
+      
+      <details>
+        <summary>▶ Evidence</summary>
+        <pre>{
+  "response_headers": "Access-Control-Allow-Origin: *\nX-Content-Type-Options: nosniff\nX-Frame-Options: SAMEORIGIN\nFeature-Policy: payment 'self'\nX-Recruiting: /#/jobs\nContent-Type: text/html; charset=utf-8\nVary: Accept-Encoding\nDate: Mon, 28 Sep 2026 12:11:24 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\nTransfer-Encoding: chunked"
+}</pre>
+      </details>
+      
+      <details>
+        <summary>▶ Remediation</summary>
+        <p style="padding:8px 0;">Add a Permissions-Policy header to restrict browser feature access.</p>
+      </details>
+    </div>
+    
+    <div class="finding-card medium">
+      <div class="finding-title">
+        <span class="badge medium">medium</span>
+        <span class="badge vl1">
+          Level 1:
+          Signature
+        </span>
+        &nbsp;Stack trace / exception detail exposed
+        <span class="muted">&nbsp;CWE-200 / A02:2021</span>
+      </div>
+      <p style="margin-top:6px;color:#57606a;font-size:13px;">Exposed internal information assists attackers in targeting further attacks with knowledge of technology stack, credentials, or paths.</p>
+      
+      <details>
+        <summary>▶ Reproduction</summary>
+        <pre>curl 'http://localhost:3000/api/Users/?name=test'  # inspect the response body</pre>
+      </details>
+      
+      
+      <details>
+        <summary>▶ Evidence</summary>
+        <pre>{
+  "matched_pattern": "(?i)(stack\\s*trace|traceback\\s*\\(most\\s*recent|at\\s+\\w[\\w.]+\\.\\w+\\([\\w.]+:\\d+\\))",
+  "response_excerpt": "3434;\n}\nh1 em, h2 em {\n  padding: 0 5px;\n  font-weight: normal;\n}\nh1 {\n  font-size: 60px;\n}\nh2 {\n  margin-top: 10px;\n}\nul li {\n  list-style: none;\n}\n#stacktrace {\n  margin-left: 60px;\n}\n</style>\n  </head>\n  <body>\n    <div id=\"wrapper\">\n      <h1>OWASP Juice Shop (Express ^4.22.1)</h1>\n      <h2><em>401</em> "
+}</pre>
+      </details>
+      
+      <details>
+        <summary>▶ Remediation</summary>
+        <p style="padding:8px 0;">Suppress detailed error messages in production. Return a generic error page instead. Configure your framework's error handling to hide internal paths and class names.</p>
+      </details>
+    </div>
+    
+  </div>
+  
+  <div style="margin-bottom:24px;">
+    <h3 style="word-break:break-all">http://localhost:3000/rest/user/login</h3>
+    
+    <div class="finding-card medium">
+      <div class="finding-title">
+        <span class="badge medium">medium</span>
+        <span class="badge vl1">
+          Level 1:
+          Signature
+        </span>
+        &nbsp;Missing header: Content-Security-Policy
+        <span class="muted">&nbsp;CWE-693 / A05:2021</span>
+      </div>
+      <p style="margin-top:6px;color:#57606a;font-size:13px;"></p>
+      
+      
+      <details>
+        <summary>▶ Evidence</summary>
+        <pre>{
+  "response_headers": "Access-Control-Allow-Origin: *\nX-Content-Type-Options: nosniff\nX-Frame-Options: SAMEORIGIN\nFeature-Policy: payment 'self'\nX-Recruiting: /#/jobs\nContent-Type: text/html; charset=utf-8\nVary: Accept-Encoding\nContent-Encoding: gzip\nDate: Mon, 28 Sep 2026 12:11:24 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\nTransfer-Encoding: chunked"
+}</pre>
+      </details>
+      
+      <details>
+        <summary>▶ Remediation</summary>
+        <p style="padding:8px 0;">Add a Content-Security-Policy header to restrict resource loading. Start with 'default-src \'self\''. Ref: https://owasp.org/www-project-secure-headers/</p>
+      </details>
+    </div>
+    
+    <div class="finding-card medium">
+      <div class="finding-title">
+        <span class="badge medium">medium</span>
+        <span class="badge vl1">
+          Level 1:
+          Signature
+        </span>
+        &nbsp;Missing header: Strict-Transport-Security
+        <span class="muted">&nbsp;CWE-693 / A05:2021</span>
+      </div>
+      <p style="margin-top:6px;color:#57606a;font-size:13px;"></p>
+      
+      
+      <details>
+        <summary>▶ Evidence</summary>
+        <pre>{
+  "response_headers": "Access-Control-Allow-Origin: *\nX-Content-Type-Options: nosniff\nX-Frame-Options: SAMEORIGIN\nFeature-Policy: payment 'self'\nX-Recruiting: /#/jobs\nContent-Type: text/html; charset=utf-8\nVary: Accept-Encoding\nContent-Encoding: gzip\nDate: Mon, 28 Sep 2026 12:11:24 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\nTransfer-Encoding: chunked"
+}</pre>
+      </details>
+      
+      <details>
+        <summary>▶ Remediation</summary>
+        <p style="padding:8px 0;">Add 'Strict-Transport-Security: max-age=31536000; includeSubDomains' to enforce HTTPS.</p>
+      </details>
+    </div>
+    
+    <div class="finding-card medium">
+      <div class="finding-title">
+        <span class="badge medium">medium</span>
+        <span class="badge vl1">
+          Level 1:
+          Signature
+        </span>
+        &nbsp;Missing header: Referrer-Policy
+        <span class="muted">&nbsp;CWE-693 / A05:2021</span>
+      </div>
+      <p style="margin-top:6px;color:#57606a;font-size:13px;"></p>
+      
+      
+      <details>
+        <summary>▶ Evidence</summary>
+        <pre>{
+  "response_headers": "Access-Control-Allow-Origin: *\nX-Content-Type-Options: nosniff\nX-Frame-Options: SAMEORIGIN\nFeature-Policy: payment 'self'\nX-Recruiting: /#/jobs\nContent-Type: text/html; charset=utf-8\nVary: Accept-Encoding\nContent-Encoding: gzip\nDate: Mon, 28 Sep 2026 12:11:24 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\nTransfer-Encoding: chunked"
+}</pre>
+      </details>
+      
+      <details>
+        <summary>▶ Remediation</summary>
+        <p style="padding:8px 0;">Add 'Referrer-Policy: no-referrer' or 'strict-origin-when-cross-origin'.</p>
+      </details>
+    </div>
+    
+    <div class="finding-card medium">
+      <div class="finding-title">
+        <span class="badge medium">medium</span>
+        <span class="badge vl1">
+          Level 1:
+          Signature
+        </span>
+        &nbsp;Missing header: Permissions-Policy
+        <span class="muted">&nbsp;CWE-693 / A05:2021</span>
+      </div>
+      <p style="margin-top:6px;color:#57606a;font-size:13px;"></p>
+      
+      
+      <details>
+        <summary>▶ Evidence</summary>
+        <pre>{
+  "response_headers": "Access-Control-Allow-Origin: *\nX-Content-Type-Options: nosniff\nX-Frame-Options: SAMEORIGIN\nFeature-Policy: payment 'self'\nX-Recruiting: /#/jobs\nContent-Type: text/html; charset=utf-8\nVary: Accept-Encoding\nContent-Encoding: gzip\nDate: Mon, 28 Sep 2026 12:11:24 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\nTransfer-Encoding: chunked"
+}</pre>
+      </details>
+      
+      <details>
+        <summary>▶ Remediation</summary>
+        <p style="padding:8px 0;">Add a Permissions-Policy header to restrict browser feature access.</p>
+      </details>
+    </div>
+    
+    <div class="finding-card medium">
+      <div class="finding-title">
+        <span class="badge medium">medium</span>
+        <span class="badge vl1">
+          Level 1:
+          Signature
+        </span>
+        &nbsp;Stack trace / exception detail exposed
+        <span class="muted">&nbsp;CWE-200 / A02:2021</span>
+      </div>
+      <p style="margin-top:6px;color:#57606a;font-size:13px;">Exposed internal information assists attackers in targeting further attacks with knowledge of technology stack, credentials, or paths.</p>
+      
+      <details>
+        <summary>▶ Reproduction</summary>
+        <pre>curl 'http://localhost:3000/rest/user/login'  # inspect the response body</pre>
+      </details>
+      
+      
+      <details>
+        <summary>▶ Evidence</summary>
+        <pre>{
+  "matched_pattern": "(?i)(stack\\s*trace|traceback\\s*\\(most\\s*recent|at\\s+\\w[\\w.]+\\.\\w+\\([\\w.]+:\\d+\\))",
+  "response_excerpt": "3434;\n}\nh1 em, h2 em {\n  padding: 0 5px;\n  font-weight: normal;\n}\nh1 {\n  font-size: 60px;\n}\nh2 {\n  margin-top: 10px;\n}\nul li {\n  list-style: none;\n}\n#stacktrace {\n  margin-left: 60px;\n}\n</style>\n  </head>\n  <body>\n    <div id=\"wrapper\">\n      <h1>OWASP Juice Shop (Express ^4.22.1)</h1>\n      <h2><em>500</em> "
+}</pre>
+      </details>
+      
+      <details>
+        <summary>▶ Remediation</summary>
+        <p style="padding:8px 0;">Suppress detailed error messages in production. Return a generic error page instead. Configure your framework's error handling to hide internal paths and class names.</p>
+      </details>
+    </div>
+    
+  </div>
+  
+  <div style="margin-bottom:24px;">
+    <h3 style="word-break:break-all">http://localhost:3000/api/Feedbacks/</h3>
+    
+    <div class="finding-card medium">
+      <div class="finding-title">
+        <span class="badge medium">medium</span>
+        <span class="badge vl1">
+          Level 1:
+          Signature
+        </span>
+        &nbsp;Missing header: Content-Security-Policy
+        <span class="muted">&nbsp;CWE-693 / A05:2021</span>
+      </div>
+      <p style="margin-top:6px;color:#57606a;font-size:13px;"></p>
+      
+      
+      <details>
+        <summary>▶ Evidence</summary>
+        <pre>{
+  "response_headers": "Access-Control-Allow-Origin: *\nX-Content-Type-Options: nosniff\nX-Frame-Options: SAMEORIGIN\nFeature-Policy: payment 'self'\nX-Recruiting: /#/jobs\nContent-Type: application/json; charset=utf-8\nETag: W/\"6c6-vxtKweNoF7R2I0PfUaU9ykZENg8\"\nVary: Accept-Encoding\nContent-Encoding: gzip\nDate: Mon, 28 Sep 2026 12:11:24 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\nTransfer-Encoding: chunked"
+}</pre>
+      </details>
+      
+      <details>
+        <summary>▶ Remediation</summary>
+        <p style="padding:8px 0;">Add a Content-Security-Policy header to restrict resource loading. Start with 'default-src \'self\''. Ref: https://owasp.org/www-project-secure-headers/</p>
+      </details>
+    </div>
+    
+    <div class="finding-card medium">
+      <div class="finding-title">
+        <span class="badge medium">medium</span>
+        <span class="badge vl1">
+          Level 1:
+          Signature
+        </span>
+        &nbsp;Missing header: Strict-Transport-Security
+        <span class="muted">&nbsp;CWE-693 / A05:2021</span>
+      </div>
+      <p style="margin-top:6px;color:#57606a;font-size:13px;"></p>
+      
+      
+      <details>
+        <summary>▶ Evidence</summary>
+        <pre>{
+  "response_headers": "Access-Control-Allow-Origin: *\nX-Content-Type-Options: nosniff\nX-Frame-Options: SAMEORIGIN\nFeature-Policy: payment 'self'\nX-Recruiting: /#/jobs\nContent-Type: application/json; charset=utf-8\nETag: W/\"6c6-vxtKweNoF7R2I0PfUaU9ykZENg8\"\nVary: Accept-Encoding\nContent-Encoding: gzip\nDate: Mon, 28 Sep 2026 12:11:24 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\nTransfer-Encoding: chunked"
+}</pre>
+      </details>
+      
+      <details>
+        <summary>▶ Remediation</summary>
+        <p style="padding:8px 0;">Add 'Strict-Transport-Security: max-age=31536000; includeSubDomains' to enforce HTTPS.</p>
+      </details>
+    </div>
+    
+    <div class="finding-card medium">
+      <div class="finding-title">
+        <span class="badge medium">medium</span>
+        <span class="badge vl1">
+          Level 1:
+          Signature
+        </span>
+        &nbsp;Missing header: Referrer-Policy
+        <span class="muted">&nbsp;CWE-693 / A05:2021</span>
+      </div>
+      <p style="margin-top:6px;color:#57606a;font-size:13px;"></p>
+      
+      
+      <details>
+        <summary>▶ Evidence</summary>
+        <pre>{
+  "response_headers": "Access-Control-Allow-Origin: *\nX-Content-Type-Options: nosniff\nX-Frame-Options: SAMEORIGIN\nFeature-Policy: payment 'self'\nX-Recruiting: /#/jobs\nContent-Type: application/json; charset=utf-8\nETag: W/\"6c6-vxtKweNoF7R2I0PfUaU9ykZENg8\"\nVary: Accept-Encoding\nContent-Encoding: gzip\nDate: Mon, 28 Sep 2026 12:11:24 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\nTransfer-Encoding: chunked"
+}</pre>
+      </details>
+      
+      <details>
+        <summary>▶ Remediation</summary>
+        <p style="padding:8px 0;">Add 'Referrer-Policy: no-referrer' or 'strict-origin-when-cross-origin'.</p>
+      </details>
+    </div>
+    
+    <div class="finding-card medium">
+      <div class="finding-title">
+        <span class="badge medium">medium</span>
+        <span class="badge vl1">
+          Level 1:
+          Signature
+        </span>
+        &nbsp;Missing header: Permissions-Policy
+        <span class="muted">&nbsp;CWE-693 / A05:2021</span>
+      </div>
+      <p style="margin-top:6px;color:#57606a;font-size:13px;"></p>
+      
+      
+      <details>
+        <summary>▶ Evidence</summary>
+        <pre>{
+  "response_headers": "Access-Control-Allow-Origin: *\nX-Content-Type-Options: nosniff\nX-Frame-Options: SAMEORIGIN\nFeature-Policy: payment 'self'\nX-Recruiting: /#/jobs\nContent-Type: application/json; charset=utf-8\nETag: W/\"6c6-vxtKweNoF7R2I0PfUaU9ykZENg8\"\nVary: Accept-Encoding\nContent-Encoding: gzip\nDate: Mon, 28 Sep 2026 12:11:24 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\nTransfer-Encoding: chunked"
+}</pre>
+      </details>
+      
+      <details>
+        <summary>▶ Remediation</summary>
+        <p style="padding:8px 0;">Add a Permissions-Policy header to restrict browser feature access.</p>
+      </details>
+    </div>
+    
+  </div>
+  
+  <div style="margin-bottom:24px;">
+    <h3 style="word-break:break-all">http://localhost:3000/rest/basket/1</h3>
+    
+    <div class="finding-card medium">
+      <div class="finding-title">
+        <span class="badge medium">medium</span>
+        <span class="badge vl1">
+          Level 1:
+          Signature
+        </span>
+        &nbsp;Missing header: Content-Security-Policy
+        <span class="muted">&nbsp;CWE-693 / A05:2021</span>
+      </div>
+      <p style="margin-top:6px;color:#57606a;font-size:13px;"></p>
+      
+      
+      <details>
+        <summary>▶ Evidence</summary>
+        <pre>{
+  "response_headers": "Access-Control-Allow-Origin: *\nX-Content-Type-Options: nosniff\nX-Frame-Options: SAMEORIGIN\nFeature-Policy: payment 'self'\nX-Recruiting: /#/jobs\nContent-Type: text/html; charset=utf-8\nVary: Accept-Encoding\nDate: Mon, 28 Sep 2026 12:11:24 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\nTransfer-Encoding: chunked"
+}</pre>
+      </details>
+      
+      <details>
+        <summary>▶ Remediation</summary>
+        <p style="padding:8px 0;">Add a Content-Security-Policy header to restrict resource loading. Start with 'default-src \'self\''. Ref: https://owasp.org/www-project-secure-headers/</p>
+      </details>
+    </div>
+    
+    <div class="finding-card medium">
+      <div class="finding-title">
+        <span class="badge medium">medium</span>
+        <span class="badge vl1">
+          Level 1:
+          Signature
+        </span>
+        &nbsp;Missing header: Strict-Transport-Security
+        <span class="muted">&nbsp;CWE-693 / A05:2021</span>
+      </div>
+      <p style="margin-top:6px;color:#57606a;font-size:13px;"></p>
+      
+      
+      <details>
+        <summary>▶ Evidence</summary>
+        <pre>{
+  "response_headers": "Access-Control-Allow-Origin: *\nX-Content-Type-Options: nosniff\nX-Frame-Options: SAMEORIGIN\nFeature-Policy: payment 'self'\nX-Recruiting: /#/jobs\nContent-Type: text/html; charset=utf-8\nVary: Accept-Encoding\nDate: Mon, 28 Sep 2026 12:11:24 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\nTransfer-Encoding: chunked"
+}</pre>
+      </details>
+      
+      <details>
+        <summary>▶ Remediation</summary>
+        <p style="padding:8px 0;">Add 'Strict-Transport-Security: max-age=31536000; includeSubDomains' to enforce HTTPS.</p>
+      </details>
+    </div>
+    
+    <div class="finding-card medium">
+      <div class="finding-title">
+        <span class="badge medium">medium</span>
+        <span class="badge vl1">
+          Level 1:
+          Signature
+        </span>
+        &nbsp;Missing header: Referrer-Policy
+        <span class="muted">&nbsp;CWE-693 / A05:2021</span>
+      </div>
+      <p style="margin-top:6px;color:#57606a;font-size:13px;"></p>
+      
+      
+      <details>
+        <summary>▶ Evidence</summary>
+        <pre>{
+  "response_headers": "Access-Control-Allow-Origin: *\nX-Content-Type-Options: nosniff\nX-Frame-Options: SAMEORIGIN\nFeature-Policy: payment 'self'\nX-Recruiting: /#/jobs\nContent-Type: text/html; charset=utf-8\nVary: Accept-Encoding\nDate: Mon, 28 Sep 2026 12:11:24 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\nTransfer-Encoding: chunked"
+}</pre>
+      </details>
+      
+      <details>
+        <summary>▶ Remediation</summary>
+        <p style="padding:8px 0;">Add 'Referrer-Policy: no-referrer' or 'strict-origin-when-cross-origin'.</p>
+      </details>
+    </div>
+    
+    <div class="finding-card medium">
+      <div class="finding-title">
+        <span class="badge medium">medium</span>
+        <span class="badge vl1">
+          Level 1:
+          Signature
+        </span>
+        &nbsp;Missing header: Permissions-Policy
+        <span class="muted">&nbsp;CWE-693 / A05:2021</span>
+      </div>
+      <p style="margin-top:6px;color:#57606a;font-size:13px;"></p>
+      
+      
+      <details>
+        <summary>▶ Evidence</summary>
+        <pre>{
+  "response_headers": "Access-Control-Allow-Origin: *\nX-Content-Type-Options: nosniff\nX-Frame-Options: SAMEORIGIN\nFeature-Policy: payment 'self'\nX-Recruiting: /#/jobs\nContent-Type: text/html; charset=utf-8\nVary: Accept-Encoding\nDate: Mon, 28 Sep 2026 12:11:24 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\nTransfer-Encoding: chunked"
+}</pre>
+      </details>
+      
+      <details>
+        <summary>▶ Remediation</summary>
+        <p style="padding:8px 0;">Add a Permissions-Policy header to restrict browser feature access.</p>
+      </details>
+    </div>
+    
+    <div class="finding-card medium">
+      <div class="finding-title">
+        <span class="badge medium">medium</span>
+        <span class="badge vl1">
+          Level 1:
+          Signature
+        </span>
+        &nbsp;Stack trace / exception detail exposed
+        <span class="muted">&nbsp;CWE-200 / A02:2021</span>
+      </div>
+      <p style="margin-top:6px;color:#57606a;font-size:13px;">Exposed internal information assists attackers in targeting further attacks with knowledge of technology stack, credentials, or paths.</p>
+      
+      <details>
+        <summary>▶ Reproduction</summary>
+        <pre>curl 'http://localhost:3000/rest/basket/1'  # inspect the response body</pre>
+      </details>
+      
+      
+      <details>
+        <summary>▶ Evidence</summary>
+        <pre>{
+  "matched_pattern": "(?i)(stack\\s*trace|traceback\\s*\\(most\\s*recent|at\\s+\\w[\\w.]+\\.\\w+\\([\\w.]+:\\d+\\))",
+  "response_excerpt": "3434;\n}\nh1 em, h2 em {\n  padding: 0 5px;\n  font-weight: normal;\n}\nh1 {\n  font-size: 60px;\n}\nh2 {\n  margin-top: 10px;\n}\nul li {\n  list-style: none;\n}\n#stacktrace {\n  margin-left: 60px;\n}\n</style>\n  </head>\n  <body>\n    <div id=\"wrapper\">\n      <h1>OWASP Juice Shop (Express ^4.22.1)</h1>\n      <h2><em>401</em> "
+}</pre>
+      </details>
+      
+      <details>
+        <summary>▶ Remediation</summary>
+        <p style="padding:8px 0;">Suppress detailed error messages in production. Return a generic error page instead. Configure your framework's error handling to hide internal paths and class names.</p>
+      </details>
+    </div>
+    
+  </div>
+  
+  <div style="margin-bottom:24px;">
+    <h3 style="word-break:break-all">http://localhost:3000/rest/products/1/reviews</h3>
+    
+    <div class="finding-card medium">
+      <div class="finding-title">
+        <span class="badge medium">medium</span>
+        <span class="badge vl1">
+          Level 1:
+          Signature
+        </span>
+        &nbsp;Missing header: Content-Security-Policy
+        <span class="muted">&nbsp;CWE-693 / A05:2021</span>
+      </div>
+      <p style="margin-top:6px;color:#57606a;font-size:13px;"></p>
+      
+      
+      <details>
+        <summary>▶ Evidence</summary>
+        <pre>{
+  "response_headers": "Access-Control-Allow-Origin: *\nX-Content-Type-Options: nosniff\nX-Frame-Options: SAMEORIGIN\nFeature-Policy: payment 'self'\nX-Recruiting: /#/jobs\nContent-Type: application/json; charset=utf-8\nContent-Length: 395\nETag: W/\"18b-ZjCwxb1HLmKT8OUcOB5nb8+F9Uk\"\nVary: Accept-Encoding\nDate: Mon, 28 Sep 2026 12:11:24 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5"
+}</pre>
+      </details>
+      
+      <details>
+        <summary>▶ Remediation</summary>
+        <p style="padding:8px 0;">Add a Content-Security-Policy header to restrict resource loading. Start with 'default-src \'self\''. Ref: https://owasp.org/www-project-secure-headers/</p>
+      </details>
+    </div>
+    
+    <div class="finding-card medium">
+      <div class="finding-title">
+        <span class="badge medium">medium</span>
+        <span class="badge vl1">
+          Level 1:
+          Signature
+        </span>
+        &nbsp;Missing header: Strict-Transport-Security
+        <span class="muted">&nbsp;CWE-693 / A05:2021</span>
+      </div>
+      <p style="margin-top:6px;color:#57606a;font-size:13px;"></p>
+      
+      
+      <details>
+        <summary>▶ Evidence</summary>
+        <pre>{
+  "response_headers": "Access-Control-Allow-Origin: *\nX-Content-Type-Options: nosniff\nX-Frame-Options: SAMEORIGIN\nFeature-Policy: payment 'self'\nX-Recruiting: /#/jobs\nContent-Type: application/json; charset=utf-8\nContent-Length: 395\nETag: W/\"18b-ZjCwxb1HLmKT8OUcOB5nb8+F9Uk\"\nVary: Accept-Encoding\nDate: Mon, 28 Sep 2026 12:11:24 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5"
+}</pre>
+      </details>
+      
+      <details>
+        <summary>▶ Remediation</summary>
+        <p style="padding:8px 0;">Add 'Strict-Transport-Security: max-age=31536000; includeSubDomains' to enforce HTTPS.</p>
+      </details>
+    </div>
+    
+    <div class="finding-card medium">
+      <div class="finding-title">
+        <span class="badge medium">medium</span>
+        <span class="badge vl1">
+          Level 1:
+          Signature
+        </span>
+        &nbsp;Missing header: Referrer-Policy
+        <span class="muted">&nbsp;CWE-693 / A05:2021</span>
+      </div>
+      <p style="margin-top:6px;color:#57606a;font-size:13px;"></p>
+      
+      
+      <details>
+        <summary>▶ Evidence</summary>
+        <pre>{
+  "response_headers": "Access-Control-Allow-Origin: *\nX-Content-Type-Options: nosniff\nX-Frame-Options: SAMEORIGIN\nFeature-Policy: payment 'self'\nX-Recruiting: /#/jobs\nContent-Type: application/json; charset=utf-8\nContent-Length: 395\nETag: W/\"18b-ZjCwxb1HLmKT8OUcOB5nb8+F9Uk\"\nVary: Accept-Encoding\nDate: Mon, 28 Sep 2026 12:11:24 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5"
+}</pre>
+      </details>
+      
+      <details>
+        <summary>▶ Remediation</summary>
+        <p style="padding:8px 0;">Add 'Referrer-Policy: no-referrer' or 'strict-origin-when-cross-origin'.</p>
+      </details>
+    </div>
+    
+    <div class="finding-card medium">
+      <div class="finding-title">
+        <span class="badge medium">medium</span>
+        <span class="badge vl1">
+          Level 1:
+          Signature
+        </span>
+        &nbsp;Missing header: Permissions-Policy
+        <span class="muted">&nbsp;CWE-693 / A05:2021</span>
+      </div>
+      <p style="margin-top:6px;color:#57606a;font-size:13px;"></p>
+      
+      
+      <details>
+        <summary>▶ Evidence</summary>
+        <pre>{
+  "response_headers": "Access-Control-Allow-Origin: *\nX-Content-Type-Options: nosniff\nX-Frame-Options: SAMEORIGIN\nFeature-Policy: payment 'self'\nX-Recruiting: /#/jobs\nContent-Type: application/json; charset=utf-8\nContent-Length: 395\nETag: W/\"18b-ZjCwxb1HLmKT8OUcOB5nb8+F9Uk\"\nVary: Accept-Encoding\nDate: Mon, 28 Sep 2026 12:11:24 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5"
+}</pre>
+      </details>
+      
+      <details>
+        <summary>▶ Remediation</summary>
+        <p style="padding:8px 0;">Add a Permissions-Policy header to restrict browser feature access.</p>
+      </details>
+    </div>
+    
+  </div>
+  
+  <div style="margin-bottom:24px;">
+    <h3 style="word-break:break-all">http://localhost:3000/assets/public/favicon_js.ico</h3>
+    
+    <div class="finding-card medium">
+      <div class="finding-title">
+        <span class="badge medium">medium</span>
+        <span class="badge vl1">
+          Level 1:
+          Signature
+        </span>
+        &nbsp;Missing header: Content-Security-Policy
+        <span class="muted">&nbsp;CWE-693 / A05:2021</span>
+      </div>
+      <p style="margin-top:6px;color:#57606a;font-size:13px;"></p>
+      
+      
+      <details>
+        <summary>▶ Evidence</summary>
+        <pre>{
+  "response_headers": "Access-Control-Allow-Origin: *\nX-Content-Type-Options: nosniff\nX-Frame-Options: SAMEORIGIN\nFeature-Policy: payment 'self'\nX-Recruiting: /#/jobs\nAccept-Ranges: bytes\nCache-Control: public, max-age=0\nLast-Modified: Tue, 11 Aug 2026 05:21:02 GMT\nETag: W/\"3aee-19fef445a30\"\nContent-Type: image/x-icon\nVary: Accept-Encoding\nContent-Encoding: gzip\nDate: Mon, 28 Sep 2026 12:11:24 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\nTransfer-Encoding: chunked"
+}</pre>
+      </details>
+      
+      <details>
+        <summary>▶ Remediation</summary>
+        <p style="padding:8px 0;">Add a Content-Security-Policy header to restrict resource loading. Start with 'default-src \'self\''. Ref: https://owasp.org/www-project-secure-headers/</p>
+      </details>
+    </div>
+    
+    <div class="finding-card medium">
+      <div class="finding-title">
+        <span class="badge medium">medium</span>
+        <span class="badge vl1">
+          Level 1:
+          Signature
+        </span>
+        &nbsp;Missing header: Strict-Transport-Security
+        <span class="muted">&nbsp;CWE-693 / A05:2021</span>
+      </div>
+      <p style="margin-top:6px;color:#57606a;font-size:13px;"></p>
+      
+      
+      <details>
+        <summary>▶ Evidence</summary>
+        <pre>{
+  "response_headers": "Access-Control-Allow-Origin: *\nX-Content-Type-Options: nosniff\nX-Frame-Options: SAMEORIGIN\nFeature-Policy: payment 'self'\nX-Recruiting: /#/jobs\nAccept-Ranges: bytes\nCache-Control: public, max-age=0\nLast-Modified: Tue, 11 Aug 2026 05:21:02 GMT\nETag: W/\"3aee-19fef445a30\"\nContent-Type: image/x-icon\nVary: Accept-Encoding\nContent-Encoding: gzip\nDate: Mon, 28 Sep 2026 12:11:24 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\nTransfer-Encoding: chunked"
+}</pre>
+      </details>
+      
+      <details>
+        <summary>▶ Remediation</summary>
+        <p style="padding:8px 0;">Add 'Strict-Transport-Security: max-age=31536000; includeSubDomains' to enforce HTTPS.</p>
+      </details>
+    </div>
+    
+    <div class="finding-card medium">
+      <div class="finding-title">
+        <span class="badge medium">medium</span>
+        <span class="badge vl1">
+          Level 1:
+          Signature
+        </span>
+        &nbsp;Missing header: Referrer-Policy
+        <span class="muted">&nbsp;CWE-693 / A05:2021</span>
+      </div>
+      <p style="margin-top:6px;color:#57606a;font-size:13px;"></p>
+      
+      
+      <details>
+        <summary>▶ Evidence</summary>
+        <pre>{
+  "response_headers": "Access-Control-Allow-Origin: *\nX-Content-Type-Options: nosniff\nX-Frame-Options: SAMEORIGIN\nFeature-Policy: payment 'self'\nX-Recruiting: /#/jobs\nAccept-Ranges: bytes\nCache-Control: public, max-age=0\nLast-Modified: Tue, 11 Aug 2026 05:21:02 GMT\nETag: W/\"3aee-19fef445a30\"\nContent-Type: image/x-icon\nVary: Accept-Encoding\nContent-Encoding: gzip\nDate: Mon, 28 Sep 2026 12:11:24 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\nTransfer-Encoding: chunked"
+}</pre>
+      </details>
+      
+      <details>
+        <summary>▶ Remediation</summary>
+        <p style="padding:8px 0;">Add 'Referrer-Policy: no-referrer' or 'strict-origin-when-cross-origin'.</p>
+      </details>
+    </div>
+    
+    <div class="finding-card medium">
+      <div class="finding-title">
+        <span class="badge medium">medium</span>
+        <span class="badge vl1">
+          Level 1:
+          Signature
+        </span>
+        &nbsp;Missing header: Permissions-Policy
+        <span class="muted">&nbsp;CWE-693 / A05:2021</span>
+      </div>
+      <p style="margin-top:6px;color:#57606a;font-size:13px;"></p>
+      
+      
+      <details>
+        <summary>▶ Evidence</summary>
+        <pre>{
+  "response_headers": "Access-Control-Allow-Origin: *\nX-Content-Type-Options: nosniff\nX-Frame-Options: SAMEORIGIN\nFeature-Policy: payment 'self'\nX-Recruiting: /#/jobs\nAccept-Ranges: bytes\nCache-Control: public, max-age=0\nLast-Modified: Tue, 11 Aug 2026 05:21:02 GMT\nETag: W/\"3aee-19fef445a30\"\nContent-Type: image/x-icon\nVary: Accept-Encoding\nContent-Encoding: gzip\nDate: Mon, 28 Sep 2026 12:11:24 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\nTransfer-Encoding: chunked"
+}</pre>
+      </details>
+      
+      <details>
+        <summary>▶ Remediation</summary>
+        <p style="padding:8px 0;">Add a Permissions-Policy header to restrict browser feature access.</p>
+      </details>
+    </div>
+    
+  </div>
+  
+  <div style="margin-bottom:24px;">
+    <h3 style="word-break:break-all">http://localhost:3000/styles.css</h3>
+    
+    <div class="finding-card medium">
+      <div class="finding-title">
+        <span class="badge medium">medium</span>
+        <span class="badge vl1">
+          Level 1:
+          Signature
+        </span>
+        &nbsp;Missing header: Content-Security-Policy
+        <span class="muted">&nbsp;CWE-693 / A05:2021</span>
+      </div>
+      <p style="margin-top:6px;color:#57606a;font-size:13px;"></p>
+      
+      
+      <details>
+        <summary>▶ Evidence</summary>
+        <pre>{
+  "response_headers": "Access-Control-Allow-Origin: *\nX-Content-Type-Options: nosniff\nX-Frame-Options: SAMEORIGIN\nFeature-Policy: payment 'self'\nX-Recruiting: /#/jobs\nAccept-Ranges: bytes\nCache-Control: public, max-age=0\nLast-Modified: Tue, 11 Aug 2026 05:36:06 GMT\nETag: W/\"24f14-19fef522570\"\nContent-Type: text/css; charset=UTF-8\nVary: Accept-Encoding\nContent-Encoding: gzip\nDate: Mon, 28 Sep 2026 12:11:24 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\nTransfer-Encoding: chunked"
+}</pre>
+      </details>
+      
+      <details>
+        <summary>▶ Remediation</summary>
+        <p style="padding:8px 0;">Add a Content-Security-Policy header to restrict resource loading. Start with 'default-src \'self\''. Ref: https://owasp.org/www-project-secure-headers/</p>
+      </details>
+    </div>
+    
+    <div class="finding-card medium">
+      <div class="finding-title">
+        <span class="badge medium">medium</span>
+        <span class="badge vl1">
+          Level 1:
+          Signature
+        </span>
+        &nbsp;Missing header: Strict-Transport-Security
+        <span class="muted">&nbsp;CWE-693 / A05:2021</span>
+      </div>
+      <p style="margin-top:6px;color:#57606a;font-size:13px;"></p>
+      
+      
+      <details>
+        <summary>▶ Evidence</summary>
+        <pre>{
+  "response_headers": "Access-Control-Allow-Origin: *\nX-Content-Type-Options: nosniff\nX-Frame-Options: SAMEORIGIN\nFeature-Policy: payment 'self'\nX-Recruiting: /#/jobs\nAccept-Ranges: bytes\nCache-Control: public, max-age=0\nLast-Modified: Tue, 11 Aug 2026 05:36:06 GMT\nETag: W/\"24f14-19fef522570\"\nContent-Type: text/css; charset=UTF-8\nVary: Accept-Encoding\nContent-Encoding: gzip\nDate: Mon, 28 Sep 2026 12:11:24 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\nTransfer-Encoding: chunked"
+}</pre>
+      </details>
+      
+      <details>
+        <summary>▶ Remediation</summary>
+        <p style="padding:8px 0;">Add 'Strict-Transport-Security: max-age=31536000; includeSubDomains' to enforce HTTPS.</p>
+      </details>
+    </div>
+    
+    <div class="finding-card medium">
+      <div class="finding-title">
+        <span class="badge medium">medium</span>
+        <span class="badge vl1">
+          Level 1:
+          Signature
+        </span>
+        &nbsp;Missing header: Referrer-Policy
+        <span class="muted">&nbsp;CWE-693 / A05:2021</span>
+      </div>
+      <p style="margin-top:6px;color:#57606a;font-size:13px;"></p>
+      
+      
+      <details>
+        <summary>▶ Evidence</summary>
+        <pre>{
+  "response_headers": "Access-Control-Allow-Origin: *\nX-Content-Type-Options: nosniff\nX-Frame-Options: SAMEORIGIN\nFeature-Policy: payment 'self'\nX-Recruiting: /#/jobs\nAccept-Ranges: bytes\nCache-Control: public, max-age=0\nLast-Modified: Tue, 11 Aug 2026 05:36:06 GMT\nETag: W/\"24f14-19fef522570\"\nContent-Type: text/css; charset=UTF-8\nVary: Accept-Encoding\nContent-Encoding: gzip\nDate: Mon, 28 Sep 2026 12:11:24 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\nTransfer-Encoding: chunked"
+}</pre>
+      </details>
+      
+      <details>
+        <summary>▶ Remediation</summary>
+        <p style="padding:8px 0;">Add 'Referrer-Policy: no-referrer' or 'strict-origin-when-cross-origin'.</p>
+      </details>
+    </div>
+    
+    <div class="finding-card medium">
+      <div class="finding-title">
+        <span class="badge medium">medium</span>
+        <span class="badge vl1">
+          Level 1:
+          Signature
+        </span>
+        &nbsp;Missing header: Permissions-Policy
+        <span class="muted">&nbsp;CWE-693 / A05:2021</span>
+      </div>
+      <p style="margin-top:6px;color:#57606a;font-size:13px;"></p>
+      
+      
+      <details>
+        <summary>▶ Evidence</summary>
+        <pre>{
+  "response_headers": "Access-Control-Allow-Origin: *\nX-Content-Type-Options: nosniff\nX-Frame-Options: SAMEORIGIN\nFeature-Policy: payment 'self'\nX-Recruiting: /#/jobs\nAccept-Ranges: bytes\nCache-Control: public, max-age=0\nLast-Modified: Tue, 11 Aug 2026 05:36:06 GMT\nETag: W/\"24f14-19fef522570\"\nContent-Type: text/css; charset=UTF-8\nVary: Accept-Encoding\nContent-Encoding: gzip\nDate: Mon, 28 Sep 2026 12:11:24 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\nTransfer-Encoding: chunked"
+}</pre>
+      </details>
+      
+      <details>
+        <summary>▶ Remediation</summary>
+        <p style="padding:8px 0;">Add a Permissions-Policy header to restrict browser feature access.</p>
+      </details>
+    </div>
+    
+  </div>
+  
+
+  
+
+  <!-- Full Findings Table -->
+  <h2>All Findings</h2>
+  
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th><th>Severity</th><th>Validation</th><th>Title</th>
+        <th>URL</th><th>Parameter</th><th>CWE</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+      <tr>
+        <td>FIND-0001</td>
+        <td><span class="badge medium">medium</span></td>
+        <td><span class="badge vl1">L1</span></td>
+        <td>Missing header: Content-Security-Policy</td>
+        <td style="word-break:break-all;font-size:12px;">http://localhost:3000</td>
+        <td>Content-Security-Policy</td>
+        <td><a href="https://cwe.mitre.org/data/definitions/693.html" target="_blank">CWE-693</a></td>
+      </tr>
+      
+      <tr>
+        <td>FIND-0002</td>
+        <td><span class="badge medium">medium</span></td>
+        <td><span class="badge vl1">L1</span></td>
+        <td>Missing header: Strict-Transport-Security</td>
+        <td style="word-break:break-all;font-size:12px;">http://localhost:3000</td>
+        <td>Strict-Transport-Security</td>
+        <td><a href="https://cwe.mitre.org/data/definitions/693.html" target="_blank">CWE-693</a></td>
+      </tr>
+      
+      <tr>
+        <td>FIND-0003</td>
+        <td><span class="badge medium">medium</span></td>
+        <td><span class="badge vl1">L1</span></td>
+        <td>Missing header: Referrer-Policy</td>
+        <td style="word-break:break-all;font-size:12px;">http://localhost:3000</td>
+        <td>Referrer-Policy</td>
+        <td><a href="https://cwe.mitre.org/data/definitions/693.html" target="_blank">CWE-693</a></td>
+      </tr>
+      
+      <tr>
+        <td>FIND-0004</td>
+        <td><span class="badge medium">medium</span></td>
+        <td><span class="badge vl1">L1</span></td>
+        <td>Missing header: Permissions-Policy</td>
+        <td style="word-break:break-all;font-size:12px;">http://localhost:3000</td>
+        <td>Permissions-Policy</td>
+        <td><a href="https://cwe.mitre.org/data/definitions/693.html" target="_blank">CWE-693</a></td>
+      </tr>
+      
+      <tr>
+        <td>FIND-0005</td>
+        <td><span class="badge medium">medium</span></td>
+        <td><span class="badge vl1">L1</span></td>
+        <td>Missing header: Content-Security-Policy</td>
+        <td style="word-break:break-all;font-size:12px;">http://localhost:3000/api/Users/?name=test</td>
+        <td>Content-Security-Policy</td>
+        <td><a href="https://cwe.mitre.org/data/definitions/693.html" target="_blank">CWE-693</a></td>
+      </tr>
+      
+      <tr>
+        <td>FIND-0006</td>
+        <td><span class="badge medium">medium</span></td>
+        <td><span class="badge vl1">L1</span></td>
+        <td>Missing header: Strict-Transport-Security</td>
+        <td style="word-break:break-all;font-size:12px;">http://localhost:3000/api/Users/?name=test</td>
+        <td>Strict-Transport-Security</td>
+        <td><a href="https://cwe.mitre.org/data/definitions/693.html" target="_blank">CWE-693</a></td>
+      </tr>
+      
+      <tr>
+        <td>FIND-0007</td>
+        <td><span class="badge medium">medium</span></td>
+        <td><span class="badge vl1">L1</span></td>
+        <td>Missing header: Referrer-Policy</td>
+        <td style="word-break:break-all;font-size:12px;">http://localhost:3000/api/Users/?name=test</td>
+        <td>Referrer-Policy</td>
+        <td><a href="https://cwe.mitre.org/data/definitions/693.html" target="_blank">CWE-693</a></td>
+      </tr>
+      
+      <tr>
+        <td>FIND-0008</td>
+        <td><span class="badge medium">medium</span></td>
+        <td><span class="badge vl1">L1</span></td>
+        <td>Missing header: Permissions-Policy</td>
+        <td style="word-break:break-all;font-size:12px;">http://localhost:3000/api/Users/?name=test</td>
+        <td>Permissions-Policy</td>
+        <td><a href="https://cwe.mitre.org/data/definitions/693.html" target="_blank">CWE-693</a></td>
+      </tr>
+      
+      <tr>
+        <td>FIND-0009</td>
+        <td><span class="badge medium">medium</span></td>
+        <td><span class="badge vl1">L1</span></td>
+        <td>Missing header: Content-Security-Policy</td>
+        <td style="word-break:break-all;font-size:12px;">http://localhost:3000/rest/user/login</td>
+        <td>Content-Security-Policy</td>
+        <td><a href="https://cwe.mitre.org/data/definitions/693.html" target="_blank">CWE-693</a></td>
+      </tr>
+      
+      <tr>
+        <td>FIND-0010</td>
+        <td><span class="badge medium">medium</span></td>
+        <td><span class="badge vl1">L1</span></td>
+        <td>Missing header: Strict-Transport-Security</td>
+        <td style="word-break:break-all;font-size:12px;">http://localhost:3000/rest/user/login</td>
+        <td>Strict-Transport-Security</td>
+        <td><a href="https://cwe.mitre.org/data/definitions/693.html" target="_blank">CWE-693</a></td>
+      </tr>
+      
+      <tr>
+        <td>FIND-0011</td>
+        <td><span class="badge medium">medium</span></td>
+        <td><span class="badge vl1">L1</span></td>
+        <td>Missing header: Referrer-Policy</td>
+        <td style="word-break:break-all;font-size:12px;">http://localhost:3000/rest/user/login</td>
+        <td>Referrer-Policy</td>
+        <td><a href="https://cwe.mitre.org/data/definitions/693.html" target="_blank">CWE-693</a></td>
+      </tr>
+      
+      <tr>
+        <td>FIND-0012</td>
+        <td><span class="badge medium">medium</span></td>
+        <td><span class="badge vl1">L1</span></td>
+        <td>Missing header: Permissions-Policy</td>
+        <td style="word-break:break-all;font-size:12px;">http://localhost:3000/rest/user/login</td>
+        <td>Permissions-Policy</td>
+        <td><a href="https://cwe.mitre.org/data/definitions/693.html" target="_blank">CWE-693</a></td>
+      </tr>
+      
+      <tr>
+        <td>FIND-0013</td>
+        <td><span class="badge medium">medium</span></td>
+        <td><span class="badge vl1">L1</span></td>
+        <td>Missing header: Content-Security-Policy</td>
+        <td style="word-break:break-all;font-size:12px;">http://localhost:3000/api/Feedbacks/</td>
+        <td>Content-Security-Policy</td>
+        <td><a href="https://cwe.mitre.org/data/definitions/693.html" target="_blank">CWE-693</a></td>
+      </tr>
+      
+      <tr>
+        <td>FIND-0014</td>
+        <td><span class="badge medium">medium</span></td>
+        <td><span class="badge vl1">L1</span></td>
+        <td>Missing header: Strict-Transport-Security</td>
+        <td style="word-break:break-all;font-size:12px;">http://localhost:3000/api/Feedbacks/</td>
+        <td>Strict-Transport-Security</td>
+        <td><a href="https://cwe.mitre.org/data/definitions/693.html" target="_blank">CWE-693</a></td>
+      </tr>
+      
+      <tr>
+        <td>FIND-0015</td>
+        <td><span class="badge medium">medium</span></td>
+        <td><span class="badge vl1">L1</span></td>
+        <td>Missing header: Referrer-Policy</td>
+        <td style="word-break:break-all;font-size:12px;">http://localhost:3000/api/Feedbacks/</td>
+        <td>Referrer-Policy</td>
+        <td><a href="https://cwe.mitre.org/data/definitions/693.html" target="_blank">CWE-693</a></td>
+      </tr>
+      
+      <tr>
+        <td>FIND-0016</td>
+        <td><span class="badge medium">medium</span></td>
+        <td><span class="badge vl1">L1</span></td>
+        <td>Missing header: Permissions-Policy</td>
+        <td style="word-break:break-all;font-size:12px;">http://localhost:3000/api/Feedbacks/</td>
+        <td>Permissions-Policy</td>
+        <td><a href="https://cwe.mitre.org/data/definitions/693.html" target="_blank">CWE-693</a></td>
+      </tr>
+      
+      <tr>
+        <td>FIND-0017</td>
+        <td><span class="badge medium">medium</span></td>
+        <td><span class="badge vl1">L1</span></td>
+        <td>Missing header: Content-Security-Policy</td>
+        <td style="word-break:break-all;font-size:12px;">http://localhost:3000/rest/basket/1</td>
+        <td>Content-Security-Policy</td>
+        <td><a href="https://cwe.mitre.org/data/definitions/693.html" target="_blank">CWE-693</a></td>
+      </tr>
+      
+      <tr>
+        <td>FIND-0018</td>
+        <td><span class="badge medium">medium</span></td>
+        <td><span class="badge vl1">L1</span></td>
+        <td>Missing header: Strict-Transport-Security</td>
+        <td style="word-break:break-all;font-size:12px;">http://localhost:3000/rest/basket/1</td>
+        <td>Strict-Transport-Security</td>
+        <td><a href="https://cwe.mitre.org/data/definitions/693.html" target="_blank">CWE-693</a></td>
+      </tr>
+      
+      <tr>
+        <td>FIND-0019</td>
+        <td><span class="badge medium">medium</span></td>
+        <td><span class="badge vl1">L1</span></td>
+        <td>Missing header: Referrer-Policy</td>
+        <td style="word-break:break-all;font-size:12px;">http://localhost:3000/rest/basket/1</td>
+        <td>Referrer-Policy</td>
+        <td><a href="https://cwe.mitre.org/data/definitions/693.html" target="_blank">CWE-693</a></td>
+      </tr>
+      
+      <tr>
+        <td>FIND-0020</td>
+        <td><span class="badge medium">medium</span></td>
+        <td><span class="badge vl1">L1</span></td>
+        <td>Missing header: Permissions-Policy</td>
+        <td style="word-break:break-all;font-size:12px;">http://localhost:3000/rest/basket/1</td>
+        <td>Permissions-Policy</td>
+        <td><a href="https://cwe.mitre.org/data/definitions/693.html" target="_blank">CWE-693</a></td>
+      </tr>
+      
+      <tr>
+        <td>FIND-0021</td>
+        <td><span class="badge medium">medium</span></td>
+        <td><span class="badge vl1">L1</span></td>
+        <td>Missing header: Content-Security-Policy</td>
+        <td style="word-break:break-all;font-size:12px;">http://localhost:3000/rest/products/1/reviews</td>
+        <td>Content-Security-Policy</td>
+        <td><a href="https://cwe.mitre.org/data/definitions/693.html" target="_blank">CWE-693</a></td>
+      </tr>
+      
+      <tr>
+        <td>FIND-0022</td>
+        <td><span class="badge medium">medium</span></td>
+        <td><span class="badge vl1">L1</span></td>
+        <td>Missing header: Strict-Transport-Security</td>
+        <td style="word-break:break-all;font-size:12px;">http://localhost:3000/rest/products/1/reviews</td>
+        <td>Strict-Transport-Security</td>
+        <td><a href="https://cwe.mitre.org/data/definitions/693.html" target="_blank">CWE-693</a></td>
+      </tr>
+      
+      <tr>
+        <td>FIND-0023</td>
+        <td><span class="badge medium">medium</span></td>
+        <td><span class="badge vl1">L1</span></td>
+        <td>Missing header: Referrer-Policy</td>
+        <td style="word-break:break-all;font-size:12px;">http://localhost:3000/rest/products/1/reviews</td>
+        <td>Referrer-Policy</td>
+        <td><a href="https://cwe.mitre.org/data/definitions/693.html" target="_blank">CWE-693</a></td>
+      </tr>
+      
+      <tr>
+        <td>FIND-0024</td>
+        <td><span class="badge medium">medium</span></td>
+        <td><span class="badge vl1">L1</span></td>
+        <td>Missing header: Permissions-Policy</td>
+        <td style="word-break:break-all;font-size:12px;">http://localhost:3000/rest/products/1/reviews</td>
+        <td>Permissions-Policy</td>
+        <td><a href="https://cwe.mitre.org/data/definitions/693.html" target="_blank">CWE-693</a></td>
+      </tr>
+      
+      <tr>
+        <td>FIND-0025</td>
+        <td><span class="badge medium">medium</span></td>
+        <td><span class="badge vl1">L1</span></td>
+        <td>Missing header: Content-Security-Policy</td>
+        <td style="word-break:break-all;font-size:12px;">http://localhost:3000/assets/public/favicon_js.ico</td>
+        <td>Content-Security-Policy</td>
+        <td><a href="https://cwe.mitre.org/data/definitions/693.html" target="_blank">CWE-693</a></td>
+      </tr>
+      
+      <tr>
+        <td>FIND-0026</td>
+        <td><span class="badge medium">medium</span></td>
+        <td><span class="badge vl1">L1</span></td>
+        <td>Missing header: Strict-Transport-Security</td>
+        <td style="word-break:break-all;font-size:12px;">http://localhost:3000/assets/public/favicon_js.ico</td>
+        <td>Strict-Transport-Security</td>
+        <td><a href="https://cwe.mitre.org/data/definitions/693.html" target="_blank">CWE-693</a></td>
+      </tr>
+      
+      <tr>
+        <td>FIND-0027</td>
+        <td><span class="badge medium">medium</span></td>
+        <td><span class="badge vl1">L1</span></td>
+        <td>Missing header: Referrer-Policy</td>
+        <td style="word-break:break-all;font-size:12px;">http://localhost:3000/assets/public/favicon_js.ico</td>
+        <td>Referrer-Policy</td>
+        <td><a href="https://cwe.mitre.org/data/definitions/693.html" target="_blank">CWE-693</a></td>
+      </tr>
+      
+      <tr>
+        <td>FIND-0028</td>
+        <td><span class="badge medium">medium</span></td>
+        <td><span class="badge vl1">L1</span></td>
+        <td>Missing header: Permissions-Policy</td>
+        <td style="word-break:break-all;font-size:12px;">http://localhost:3000/assets/public/favicon_js.ico</td>
+        <td>Permissions-Policy</td>
+        <td><a href="https://cwe.mitre.org/data/definitions/693.html" target="_blank">CWE-693</a></td>
+      </tr>
+      
+      <tr>
+        <td>FIND-0029</td>
+        <td><span class="badge medium">medium</span></td>
+        <td><span class="badge vl1">L1</span></td>
+        <td>Missing header: Content-Security-Policy</td>
+        <td style="word-break:break-all;font-size:12px;">http://localhost:3000/styles.css</td>
+        <td>Content-Security-Policy</td>
+        <td><a href="https://cwe.mitre.org/data/definitions/693.html" target="_blank">CWE-693</a></td>
+      </tr>
+      
+      <tr>
+        <td>FIND-0030</td>
+        <td><span class="badge medium">medium</span></td>
+        <td><span class="badge vl1">L1</span></td>
+        <td>Missing header: Strict-Transport-Security</td>
+        <td style="word-break:break-all;font-size:12px;">http://localhost:3000/styles.css</td>
+        <td>Strict-Transport-Security</td>
+        <td><a href="https://cwe.mitre.org/data/definitions/693.html" target="_blank">CWE-693</a></td>
+      </tr>
+      
+      <tr>
+        <td>FIND-0031</td>
+        <td><span class="badge medium">medium</span></td>
+        <td><span class="badge vl1">L1</span></td>
+        <td>Missing header: Referrer-Policy</td>
+        <td style="word-break:break-all;font-size:12px;">http://localhost:3000/styles.css</td>
+        <td>Referrer-Policy</td>
+        <td><a href="https://cwe.mitre.org/data/definitions/693.html" target="_blank">CWE-693</a></td>
+      </tr>
+      
+      <tr>
+        <td>FIND-0032</td>
+        <td><span class="badge medium">medium</span></td>
+        <td><span class="badge vl1">L1</span></td>
+        <td>Missing header: Permissions-Policy</td>
+        <td style="word-break:break-all;font-size:12px;">http://localhost:3000/styles.css</td>
+        <td>Permissions-Policy</td>
+        <td><a href="https://cwe.mitre.org/data/definitions/693.html" target="_blank">CWE-693</a></td>
+      </tr>
+      
+      <tr>
+        <td>FIND-0033</td>
+        <td><span class="badge low">low</span></td>
+        <td><span class="badge vl1">L1</span></td>
+        <td>HTML comment with potentially sensitive content</td>
+        <td style="word-break:break-all;font-size:12px;">http://localhost:3000</td>
+        <td>—</td>
+        <td><a href="https://cwe.mitre.org/data/definitions/200.html" target="_blank">CWE-200</a></td>
+      </tr>
+      
+      <tr>
+        <td>FIND-0034</td>
+        <td><span class="badge medium">medium</span></td>
+        <td><span class="badge vl1">L1</span></td>
+        <td>Stack trace / exception detail exposed</td>
+        <td style="word-break:break-all;font-size:12px;">http://localhost:3000/api/Users/?name=test</td>
+        <td>—</td>
+        <td><a href="https://cwe.mitre.org/data/definitions/200.html" target="_blank">CWE-200</a></td>
+      </tr>
+      
+      <tr>
+        <td>FIND-0035</td>
+        <td><span class="badge medium">medium</span></td>
+        <td><span class="badge vl1">L1</span></td>
+        <td>Stack trace / exception detail exposed</td>
+        <td style="word-break:break-all;font-size:12px;">http://localhost:3000/rest/user/login</td>
+        <td>—</td>
+        <td><a href="https://cwe.mitre.org/data/definitions/200.html" target="_blank">CWE-200</a></td>
+      </tr>
+      
+      <tr>
+        <td>FIND-0036</td>
+        <td><span class="badge medium">medium</span></td>
+        <td><span class="badge vl1">L1</span></td>
+        <td>Stack trace / exception detail exposed</td>
+        <td style="word-break:break-all;font-size:12px;">http://localhost:3000/rest/basket/1</td>
+        <td>—</td>
+        <td><a href="https://cwe.mitre.org/data/definitions/200.html" target="_blank">CWE-200</a></td>
+      </tr>
+      
+    </tbody>
+  </table>
+  
+
+</div>
+<footer>Made with IBM Bob</footer>
+</body>
+</html>

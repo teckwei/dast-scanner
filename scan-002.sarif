@@ -1,0 +1,1742 @@
+{
+  "$schema": "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "DAST Scanner",
+          "version": "1.0.0",
+          "informationUri": "https://github.com/example/dast-demo",
+          "rules": [
+            {
+              "id": "HEADERS-001",
+              "name": "Missing header: Content-Security-Policy",
+              "shortDescription": {
+                "text": "Missing header: Content-Security-Policy"
+              },
+              "fullDescription": {
+                "text": ""
+              },
+              "helpUri": "https://cwe.mitre.org/data/definitions/693.html",
+              "help": {
+                "text": "Add a Content-Security-Policy header to restrict resource loading. Start with 'default-src \\'self\\''. Ref: https://owasp.org/www-project-secure-headers/",
+                "markdown": "Add a Content-Security-Policy header to restrict resource loading. Start with 'default-src \\'self\\''. Ref: https://owasp.org/www-project-secure-headers/"
+              },
+              "properties": {
+                "tags": [
+                  "A05:2021",
+                  "CWE-693"
+                ],
+                "severity": "medium",
+                "precision": "medium"
+              }
+            },
+            {
+              "id": "SENSINFO-001",
+              "name": "HTML comment with potentially sensitive content",
+              "shortDescription": {
+                "text": "HTML comment with potentially sensitive content"
+              },
+              "fullDescription": {
+                "text": "Exposed internal information assists attackers in targeting further attacks with knowledge of technology stack, credentials, or paths."
+              },
+              "helpUri": "https://cwe.mitre.org/data/definitions/200.html",
+              "help": {
+                "text": "Review and remove HTML comments containing internal paths, version numbers, or developer notes before deploying to production.",
+                "markdown": "Review and remove HTML comments containing internal paths, version numbers, or developer notes before deploying to production."
+              },
+              "properties": {
+                "tags": [
+                  "A02:2021",
+                  "CWE-200"
+                ],
+                "severity": "low",
+                "precision": "medium"
+              }
+            }
+          ]
+        }
+      },
+      "results": [
+        {
+          "ruleId": "HEADERS-001",
+          "level": "warning",
+          "message": {
+            "text": "Missing header: Content-Security-Policy\n\nURL: http://localhost:3000\nParameter: Content-Security-Policy\n\nReproduction:\n\n\nRemediation:\nAdd a Content-Security-Policy header to restrict resource loading. Start with 'default-src \\'self\\''. Ref: https://owasp.org/www-project-secure-headers/"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "properties": {
+            "findingId": "FIND-0001",
+            "scanId": "scan-002",
+            "severity": "medium",
+            "validationLevel": 1,
+            "parameter": "Content-Security-Policy",
+            "method": "GET",
+            "impact": "",
+            "ownerHint": "",
+            "firstSeen": "2026-09-28T12:11:26.777150+00:00",
+            "evidence": {
+              "response_headers": "Access-Control-Allow-Origin: *\nX-Content-Type-Options: nosniff\nX-Frame-Options: SAMEORIGIN\nFeature-Policy: payment 'self'\nX-Recruiting: /#/jobs\nAccept-Ranges: bytes\nCache-Control: public, max-age=0\nLast-Modified: Mon, 28 Sep 2026 12:06:25 GMT\nETag: W/\"24b1-1a0e7e8c195\"\nContent-Type: text/html; charset=UTF-8\nVary: Accept-Encoding\nContent-Encoding: gzip\nDate: Mon, 28 Sep 2026 12:11:24 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\nTransfer-Encoding: chunked"
+            }
+          },
+          "relatedLocations": [
+            {
+              "id": 1,
+              "message": {
+                "text": "Evidence"
+              },
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "HEADERS-001",
+          "level": "warning",
+          "message": {
+            "text": "Missing header: Strict-Transport-Security\n\nURL: http://localhost:3000\nParameter: Strict-Transport-Security\n\nReproduction:\n\n\nRemediation:\nAdd 'Strict-Transport-Security: max-age=31536000; includeSubDomains' to enforce HTTPS."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "properties": {
+            "findingId": "FIND-0002",
+            "scanId": "scan-002",
+            "severity": "medium",
+            "validationLevel": 1,
+            "parameter": "Strict-Transport-Security",
+            "method": "GET",
+            "impact": "",
+            "ownerHint": "",
+            "firstSeen": "2026-09-28T12:11:26.777192+00:00",
+            "evidence": {
+              "response_headers": "Access-Control-Allow-Origin: *\nX-Content-Type-Options: nosniff\nX-Frame-Options: SAMEORIGIN\nFeature-Policy: payment 'self'\nX-Recruiting: /#/jobs\nAccept-Ranges: bytes\nCache-Control: public, max-age=0\nLast-Modified: Mon, 28 Sep 2026 12:06:25 GMT\nETag: W/\"24b1-1a0e7e8c195\"\nContent-Type: text/html; charset=UTF-8\nVary: Accept-Encoding\nContent-Encoding: gzip\nDate: Mon, 28 Sep 2026 12:11:24 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\nTransfer-Encoding: chunked"
+            }
+          },
+          "relatedLocations": [
+            {
+              "id": 1,
+              "message": {
+                "text": "Evidence"
+              },
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "HEADERS-001",
+          "level": "warning",
+          "message": {
+            "text": "Missing header: Referrer-Policy\n\nURL: http://localhost:3000\nParameter: Referrer-Policy\n\nReproduction:\n\n\nRemediation:\nAdd 'Referrer-Policy: no-referrer' or 'strict-origin-when-cross-origin'."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "properties": {
+            "findingId": "FIND-0003",
+            "scanId": "scan-002",
+            "severity": "medium",
+            "validationLevel": 1,
+            "parameter": "Referrer-Policy",
+            "method": "GET",
+            "impact": "",
+            "ownerHint": "",
+            "firstSeen": "2026-09-28T12:11:26.777203+00:00",
+            "evidence": {
+              "response_headers": "Access-Control-Allow-Origin: *\nX-Content-Type-Options: nosniff\nX-Frame-Options: SAMEORIGIN\nFeature-Policy: payment 'self'\nX-Recruiting: /#/jobs\nAccept-Ranges: bytes\nCache-Control: public, max-age=0\nLast-Modified: Mon, 28 Sep 2026 12:06:25 GMT\nETag: W/\"24b1-1a0e7e8c195\"\nContent-Type: text/html; charset=UTF-8\nVary: Accept-Encoding\nContent-Encoding: gzip\nDate: Mon, 28 Sep 2026 12:11:24 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\nTransfer-Encoding: chunked"
+            }
+          },
+          "relatedLocations": [
+            {
+              "id": 1,
+              "message": {
+                "text": "Evidence"
+              },
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "HEADERS-001",
+          "level": "warning",
+          "message": {
+            "text": "Missing header: Permissions-Policy\n\nURL: http://localhost:3000\nParameter: Permissions-Policy\n\nReproduction:\n\n\nRemediation:\nAdd a Permissions-Policy header to restrict browser feature access."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "properties": {
+            "findingId": "FIND-0004",
+            "scanId": "scan-002",
+            "severity": "medium",
+            "validationLevel": 1,
+            "parameter": "Permissions-Policy",
+            "method": "GET",
+            "impact": "",
+            "ownerHint": "",
+            "firstSeen": "2026-09-28T12:11:26.777211+00:00",
+            "evidence": {
+              "response_headers": "Access-Control-Allow-Origin: *\nX-Content-Type-Options: nosniff\nX-Frame-Options: SAMEORIGIN\nFeature-Policy: payment 'self'\nX-Recruiting: /#/jobs\nAccept-Ranges: bytes\nCache-Control: public, max-age=0\nLast-Modified: Mon, 28 Sep 2026 12:06:25 GMT\nETag: W/\"24b1-1a0e7e8c195\"\nContent-Type: text/html; charset=UTF-8\nVary: Accept-Encoding\nContent-Encoding: gzip\nDate: Mon, 28 Sep 2026 12:11:24 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\nTransfer-Encoding: chunked"
+            }
+          },
+          "relatedLocations": [
+            {
+              "id": 1,
+              "message": {
+                "text": "Evidence"
+              },
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "HEADERS-001",
+          "level": "warning",
+          "message": {
+            "text": "Missing header: Content-Security-Policy\n\nURL: http://localhost:3000/api/Users/?name=test\nParameter: Content-Security-Policy\n\nReproduction:\n\n\nRemediation:\nAdd a Content-Security-Policy header to restrict resource loading. Start with 'default-src \\'self\\''. Ref: https://owasp.org/www-project-secure-headers/"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000/api/Users/?name=test"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "properties": {
+            "findingId": "FIND-0005",
+            "scanId": "scan-002",
+            "severity": "medium",
+            "validationLevel": 1,
+            "parameter": "Content-Security-Policy",
+            "method": "GET",
+            "impact": "",
+            "ownerHint": "",
+            "firstSeen": "2026-09-28T12:11:26.777218+00:00",
+            "evidence": {
+              "response_headers": "Access-Control-Allow-Origin: *\nX-Content-Type-Options: nosniff\nX-Frame-Options: SAMEORIGIN\nFeature-Policy: payment 'self'\nX-Recruiting: /#/jobs\nContent-Type: text/html; charset=utf-8\nVary: Accept-Encoding\nDate: Mon, 28 Sep 2026 12:11:24 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\nTransfer-Encoding: chunked"
+            }
+          },
+          "relatedLocations": [
+            {
+              "id": 1,
+              "message": {
+                "text": "Evidence"
+              },
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000/api/Users/?name=test"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "HEADERS-001",
+          "level": "warning",
+          "message": {
+            "text": "Missing header: Strict-Transport-Security\n\nURL: http://localhost:3000/api/Users/?name=test\nParameter: Strict-Transport-Security\n\nReproduction:\n\n\nRemediation:\nAdd 'Strict-Transport-Security: max-age=31536000; includeSubDomains' to enforce HTTPS."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000/api/Users/?name=test"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "properties": {
+            "findingId": "FIND-0006",
+            "scanId": "scan-002",
+            "severity": "medium",
+            "validationLevel": 1,
+            "parameter": "Strict-Transport-Security",
+            "method": "GET",
+            "impact": "",
+            "ownerHint": "",
+            "firstSeen": "2026-09-28T12:11:26.777258+00:00",
+            "evidence": {
+              "response_headers": "Access-Control-Allow-Origin: *\nX-Content-Type-Options: nosniff\nX-Frame-Options: SAMEORIGIN\nFeature-Policy: payment 'self'\nX-Recruiting: /#/jobs\nContent-Type: text/html; charset=utf-8\nVary: Accept-Encoding\nDate: Mon, 28 Sep 2026 12:11:24 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\nTransfer-Encoding: chunked"
+            }
+          },
+          "relatedLocations": [
+            {
+              "id": 1,
+              "message": {
+                "text": "Evidence"
+              },
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000/api/Users/?name=test"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "HEADERS-001",
+          "level": "warning",
+          "message": {
+            "text": "Missing header: Referrer-Policy\n\nURL: http://localhost:3000/api/Users/?name=test\nParameter: Referrer-Policy\n\nReproduction:\n\n\nRemediation:\nAdd 'Referrer-Policy: no-referrer' or 'strict-origin-when-cross-origin'."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000/api/Users/?name=test"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "properties": {
+            "findingId": "FIND-0007",
+            "scanId": "scan-002",
+            "severity": "medium",
+            "validationLevel": 1,
+            "parameter": "Referrer-Policy",
+            "method": "GET",
+            "impact": "",
+            "ownerHint": "",
+            "firstSeen": "2026-09-28T12:11:26.777276+00:00",
+            "evidence": {
+              "response_headers": "Access-Control-Allow-Origin: *\nX-Content-Type-Options: nosniff\nX-Frame-Options: SAMEORIGIN\nFeature-Policy: payment 'self'\nX-Recruiting: /#/jobs\nContent-Type: text/html; charset=utf-8\nVary: Accept-Encoding\nDate: Mon, 28 Sep 2026 12:11:24 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\nTransfer-Encoding: chunked"
+            }
+          },
+          "relatedLocations": [
+            {
+              "id": 1,
+              "message": {
+                "text": "Evidence"
+              },
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000/api/Users/?name=test"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "HEADERS-001",
+          "level": "warning",
+          "message": {
+            "text": "Missing header: Permissions-Policy\n\nURL: http://localhost:3000/api/Users/?name=test\nParameter: Permissions-Policy\n\nReproduction:\n\n\nRemediation:\nAdd a Permissions-Policy header to restrict browser feature access."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000/api/Users/?name=test"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "properties": {
+            "findingId": "FIND-0008",
+            "scanId": "scan-002",
+            "severity": "medium",
+            "validationLevel": 1,
+            "parameter": "Permissions-Policy",
+            "method": "GET",
+            "impact": "",
+            "ownerHint": "",
+            "firstSeen": "2026-09-28T12:11:26.777285+00:00",
+            "evidence": {
+              "response_headers": "Access-Control-Allow-Origin: *\nX-Content-Type-Options: nosniff\nX-Frame-Options: SAMEORIGIN\nFeature-Policy: payment 'self'\nX-Recruiting: /#/jobs\nContent-Type: text/html; charset=utf-8\nVary: Accept-Encoding\nDate: Mon, 28 Sep 2026 12:11:24 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\nTransfer-Encoding: chunked"
+            }
+          },
+          "relatedLocations": [
+            {
+              "id": 1,
+              "message": {
+                "text": "Evidence"
+              },
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000/api/Users/?name=test"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "HEADERS-001",
+          "level": "warning",
+          "message": {
+            "text": "Missing header: Content-Security-Policy\n\nURL: http://localhost:3000/rest/user/login\nParameter: Content-Security-Policy\n\nReproduction:\n\n\nRemediation:\nAdd a Content-Security-Policy header to restrict resource loading. Start with 'default-src \\'self\\''. Ref: https://owasp.org/www-project-secure-headers/"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000/rest/user/login"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "properties": {
+            "findingId": "FIND-0009",
+            "scanId": "scan-002",
+            "severity": "medium",
+            "validationLevel": 1,
+            "parameter": "Content-Security-Policy",
+            "method": "GET",
+            "impact": "",
+            "ownerHint": "",
+            "firstSeen": "2026-09-28T12:11:26.777312+00:00",
+            "evidence": {
+              "response_headers": "Access-Control-Allow-Origin: *\nX-Content-Type-Options: nosniff\nX-Frame-Options: SAMEORIGIN\nFeature-Policy: payment 'self'\nX-Recruiting: /#/jobs\nContent-Type: text/html; charset=utf-8\nVary: Accept-Encoding\nContent-Encoding: gzip\nDate: Mon, 28 Sep 2026 12:11:24 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\nTransfer-Encoding: chunked"
+            }
+          },
+          "relatedLocations": [
+            {
+              "id": 1,
+              "message": {
+                "text": "Evidence"
+              },
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000/rest/user/login"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "HEADERS-001",
+          "level": "warning",
+          "message": {
+            "text": "Missing header: Strict-Transport-Security\n\nURL: http://localhost:3000/rest/user/login\nParameter: Strict-Transport-Security\n\nReproduction:\n\n\nRemediation:\nAdd 'Strict-Transport-Security: max-age=31536000; includeSubDomains' to enforce HTTPS."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000/rest/user/login"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "properties": {
+            "findingId": "FIND-0010",
+            "scanId": "scan-002",
+            "severity": "medium",
+            "validationLevel": 1,
+            "parameter": "Strict-Transport-Security",
+            "method": "GET",
+            "impact": "",
+            "ownerHint": "",
+            "firstSeen": "2026-09-28T12:11:26.777319+00:00",
+            "evidence": {
+              "response_headers": "Access-Control-Allow-Origin: *\nX-Content-Type-Options: nosniff\nX-Frame-Options: SAMEORIGIN\nFeature-Policy: payment 'self'\nX-Recruiting: /#/jobs\nContent-Type: text/html; charset=utf-8\nVary: Accept-Encoding\nContent-Encoding: gzip\nDate: Mon, 28 Sep 2026 12:11:24 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\nTransfer-Encoding: chunked"
+            }
+          },
+          "relatedLocations": [
+            {
+              "id": 1,
+              "message": {
+                "text": "Evidence"
+              },
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000/rest/user/login"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "HEADERS-001",
+          "level": "warning",
+          "message": {
+            "text": "Missing header: Referrer-Policy\n\nURL: http://localhost:3000/rest/user/login\nParameter: Referrer-Policy\n\nReproduction:\n\n\nRemediation:\nAdd 'Referrer-Policy: no-referrer' or 'strict-origin-when-cross-origin'."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000/rest/user/login"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "properties": {
+            "findingId": "FIND-0011",
+            "scanId": "scan-002",
+            "severity": "medium",
+            "validationLevel": 1,
+            "parameter": "Referrer-Policy",
+            "method": "GET",
+            "impact": "",
+            "ownerHint": "",
+            "firstSeen": "2026-09-28T12:11:26.777326+00:00",
+            "evidence": {
+              "response_headers": "Access-Control-Allow-Origin: *\nX-Content-Type-Options: nosniff\nX-Frame-Options: SAMEORIGIN\nFeature-Policy: payment 'self'\nX-Recruiting: /#/jobs\nContent-Type: text/html; charset=utf-8\nVary: Accept-Encoding\nContent-Encoding: gzip\nDate: Mon, 28 Sep 2026 12:11:24 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\nTransfer-Encoding: chunked"
+            }
+          },
+          "relatedLocations": [
+            {
+              "id": 1,
+              "message": {
+                "text": "Evidence"
+              },
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000/rest/user/login"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "HEADERS-001",
+          "level": "warning",
+          "message": {
+            "text": "Missing header: Permissions-Policy\n\nURL: http://localhost:3000/rest/user/login\nParameter: Permissions-Policy\n\nReproduction:\n\n\nRemediation:\nAdd a Permissions-Policy header to restrict browser feature access."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000/rest/user/login"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "properties": {
+            "findingId": "FIND-0012",
+            "scanId": "scan-002",
+            "severity": "medium",
+            "validationLevel": 1,
+            "parameter": "Permissions-Policy",
+            "method": "GET",
+            "impact": "",
+            "ownerHint": "",
+            "firstSeen": "2026-09-28T12:11:26.777335+00:00",
+            "evidence": {
+              "response_headers": "Access-Control-Allow-Origin: *\nX-Content-Type-Options: nosniff\nX-Frame-Options: SAMEORIGIN\nFeature-Policy: payment 'self'\nX-Recruiting: /#/jobs\nContent-Type: text/html; charset=utf-8\nVary: Accept-Encoding\nContent-Encoding: gzip\nDate: Mon, 28 Sep 2026 12:11:24 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\nTransfer-Encoding: chunked"
+            }
+          },
+          "relatedLocations": [
+            {
+              "id": 1,
+              "message": {
+                "text": "Evidence"
+              },
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000/rest/user/login"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "HEADERS-001",
+          "level": "warning",
+          "message": {
+            "text": "Missing header: Content-Security-Policy\n\nURL: http://localhost:3000/api/Feedbacks/\nParameter: Content-Security-Policy\n\nReproduction:\n\n\nRemediation:\nAdd a Content-Security-Policy header to restrict resource loading. Start with 'default-src \\'self\\''. Ref: https://owasp.org/www-project-secure-headers/"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000/api/Feedbacks/"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "properties": {
+            "findingId": "FIND-0013",
+            "scanId": "scan-002",
+            "severity": "medium",
+            "validationLevel": 1,
+            "parameter": "Content-Security-Policy",
+            "method": "GET",
+            "impact": "",
+            "ownerHint": "",
+            "firstSeen": "2026-09-28T12:11:26.777341+00:00",
+            "evidence": {
+              "response_headers": "Access-Control-Allow-Origin: *\nX-Content-Type-Options: nosniff\nX-Frame-Options: SAMEORIGIN\nFeature-Policy: payment 'self'\nX-Recruiting: /#/jobs\nContent-Type: application/json; charset=utf-8\nETag: W/\"6c6-vxtKweNoF7R2I0PfUaU9ykZENg8\"\nVary: Accept-Encoding\nContent-Encoding: gzip\nDate: Mon, 28 Sep 2026 12:11:24 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\nTransfer-Encoding: chunked"
+            }
+          },
+          "relatedLocations": [
+            {
+              "id": 1,
+              "message": {
+                "text": "Evidence"
+              },
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000/api/Feedbacks/"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "HEADERS-001",
+          "level": "warning",
+          "message": {
+            "text": "Missing header: Strict-Transport-Security\n\nURL: http://localhost:3000/api/Feedbacks/\nParameter: Strict-Transport-Security\n\nReproduction:\n\n\nRemediation:\nAdd 'Strict-Transport-Security: max-age=31536000; includeSubDomains' to enforce HTTPS."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000/api/Feedbacks/"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "properties": {
+            "findingId": "FIND-0014",
+            "scanId": "scan-002",
+            "severity": "medium",
+            "validationLevel": 1,
+            "parameter": "Strict-Transport-Security",
+            "method": "GET",
+            "impact": "",
+            "ownerHint": "",
+            "firstSeen": "2026-09-28T12:11:26.777347+00:00",
+            "evidence": {
+              "response_headers": "Access-Control-Allow-Origin: *\nX-Content-Type-Options: nosniff\nX-Frame-Options: SAMEORIGIN\nFeature-Policy: payment 'self'\nX-Recruiting: /#/jobs\nContent-Type: application/json; charset=utf-8\nETag: W/\"6c6-vxtKweNoF7R2I0PfUaU9ykZENg8\"\nVary: Accept-Encoding\nContent-Encoding: gzip\nDate: Mon, 28 Sep 2026 12:11:24 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\nTransfer-Encoding: chunked"
+            }
+          },
+          "relatedLocations": [
+            {
+              "id": 1,
+              "message": {
+                "text": "Evidence"
+              },
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000/api/Feedbacks/"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "HEADERS-001",
+          "level": "warning",
+          "message": {
+            "text": "Missing header: Referrer-Policy\n\nURL: http://localhost:3000/api/Feedbacks/\nParameter: Referrer-Policy\n\nReproduction:\n\n\nRemediation:\nAdd 'Referrer-Policy: no-referrer' or 'strict-origin-when-cross-origin'."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000/api/Feedbacks/"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "properties": {
+            "findingId": "FIND-0015",
+            "scanId": "scan-002",
+            "severity": "medium",
+            "validationLevel": 1,
+            "parameter": "Referrer-Policy",
+            "method": "GET",
+            "impact": "",
+            "ownerHint": "",
+            "firstSeen": "2026-09-28T12:11:26.777353+00:00",
+            "evidence": {
+              "response_headers": "Access-Control-Allow-Origin: *\nX-Content-Type-Options: nosniff\nX-Frame-Options: SAMEORIGIN\nFeature-Policy: payment 'self'\nX-Recruiting: /#/jobs\nContent-Type: application/json; charset=utf-8\nETag: W/\"6c6-vxtKweNoF7R2I0PfUaU9ykZENg8\"\nVary: Accept-Encoding\nContent-Encoding: gzip\nDate: Mon, 28 Sep 2026 12:11:24 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\nTransfer-Encoding: chunked"
+            }
+          },
+          "relatedLocations": [
+            {
+              "id": 1,
+              "message": {
+                "text": "Evidence"
+              },
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000/api/Feedbacks/"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "HEADERS-001",
+          "level": "warning",
+          "message": {
+            "text": "Missing header: Permissions-Policy\n\nURL: http://localhost:3000/api/Feedbacks/\nParameter: Permissions-Policy\n\nReproduction:\n\n\nRemediation:\nAdd a Permissions-Policy header to restrict browser feature access."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000/api/Feedbacks/"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "properties": {
+            "findingId": "FIND-0016",
+            "scanId": "scan-002",
+            "severity": "medium",
+            "validationLevel": 1,
+            "parameter": "Permissions-Policy",
+            "method": "GET",
+            "impact": "",
+            "ownerHint": "",
+            "firstSeen": "2026-09-28T12:11:26.777359+00:00",
+            "evidence": {
+              "response_headers": "Access-Control-Allow-Origin: *\nX-Content-Type-Options: nosniff\nX-Frame-Options: SAMEORIGIN\nFeature-Policy: payment 'self'\nX-Recruiting: /#/jobs\nContent-Type: application/json; charset=utf-8\nETag: W/\"6c6-vxtKweNoF7R2I0PfUaU9ykZENg8\"\nVary: Accept-Encoding\nContent-Encoding: gzip\nDate: Mon, 28 Sep 2026 12:11:24 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\nTransfer-Encoding: chunked"
+            }
+          },
+          "relatedLocations": [
+            {
+              "id": 1,
+              "message": {
+                "text": "Evidence"
+              },
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000/api/Feedbacks/"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "HEADERS-001",
+          "level": "warning",
+          "message": {
+            "text": "Missing header: Content-Security-Policy\n\nURL: http://localhost:3000/rest/basket/1\nParameter: Content-Security-Policy\n\nReproduction:\n\n\nRemediation:\nAdd a Content-Security-Policy header to restrict resource loading. Start with 'default-src \\'self\\''. Ref: https://owasp.org/www-project-secure-headers/"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000/rest/basket/1"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "properties": {
+            "findingId": "FIND-0017",
+            "scanId": "scan-002",
+            "severity": "medium",
+            "validationLevel": 1,
+            "parameter": "Content-Security-Policy",
+            "method": "GET",
+            "impact": "",
+            "ownerHint": "",
+            "firstSeen": "2026-09-28T12:11:26.777365+00:00",
+            "evidence": {
+              "response_headers": "Access-Control-Allow-Origin: *\nX-Content-Type-Options: nosniff\nX-Frame-Options: SAMEORIGIN\nFeature-Policy: payment 'self'\nX-Recruiting: /#/jobs\nContent-Type: text/html; charset=utf-8\nVary: Accept-Encoding\nDate: Mon, 28 Sep 2026 12:11:24 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\nTransfer-Encoding: chunked"
+            }
+          },
+          "relatedLocations": [
+            {
+              "id": 1,
+              "message": {
+                "text": "Evidence"
+              },
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000/rest/basket/1"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "HEADERS-001",
+          "level": "warning",
+          "message": {
+            "text": "Missing header: Strict-Transport-Security\n\nURL: http://localhost:3000/rest/basket/1\nParameter: Strict-Transport-Security\n\nReproduction:\n\n\nRemediation:\nAdd 'Strict-Transport-Security: max-age=31536000; includeSubDomains' to enforce HTTPS."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000/rest/basket/1"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "properties": {
+            "findingId": "FIND-0018",
+            "scanId": "scan-002",
+            "severity": "medium",
+            "validationLevel": 1,
+            "parameter": "Strict-Transport-Security",
+            "method": "GET",
+            "impact": "",
+            "ownerHint": "",
+            "firstSeen": "2026-09-28T12:11:26.777371+00:00",
+            "evidence": {
+              "response_headers": "Access-Control-Allow-Origin: *\nX-Content-Type-Options: nosniff\nX-Frame-Options: SAMEORIGIN\nFeature-Policy: payment 'self'\nX-Recruiting: /#/jobs\nContent-Type: text/html; charset=utf-8\nVary: Accept-Encoding\nDate: Mon, 28 Sep 2026 12:11:24 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\nTransfer-Encoding: chunked"
+            }
+          },
+          "relatedLocations": [
+            {
+              "id": 1,
+              "message": {
+                "text": "Evidence"
+              },
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000/rest/basket/1"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "HEADERS-001",
+          "level": "warning",
+          "message": {
+            "text": "Missing header: Referrer-Policy\n\nURL: http://localhost:3000/rest/basket/1\nParameter: Referrer-Policy\n\nReproduction:\n\n\nRemediation:\nAdd 'Referrer-Policy: no-referrer' or 'strict-origin-when-cross-origin'."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000/rest/basket/1"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "properties": {
+            "findingId": "FIND-0019",
+            "scanId": "scan-002",
+            "severity": "medium",
+            "validationLevel": 1,
+            "parameter": "Referrer-Policy",
+            "method": "GET",
+            "impact": "",
+            "ownerHint": "",
+            "firstSeen": "2026-09-28T12:11:26.777379+00:00",
+            "evidence": {
+              "response_headers": "Access-Control-Allow-Origin: *\nX-Content-Type-Options: nosniff\nX-Frame-Options: SAMEORIGIN\nFeature-Policy: payment 'self'\nX-Recruiting: /#/jobs\nContent-Type: text/html; charset=utf-8\nVary: Accept-Encoding\nDate: Mon, 28 Sep 2026 12:11:24 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\nTransfer-Encoding: chunked"
+            }
+          },
+          "relatedLocations": [
+            {
+              "id": 1,
+              "message": {
+                "text": "Evidence"
+              },
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000/rest/basket/1"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "HEADERS-001",
+          "level": "warning",
+          "message": {
+            "text": "Missing header: Permissions-Policy\n\nURL: http://localhost:3000/rest/basket/1\nParameter: Permissions-Policy\n\nReproduction:\n\n\nRemediation:\nAdd a Permissions-Policy header to restrict browser feature access."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000/rest/basket/1"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "properties": {
+            "findingId": "FIND-0020",
+            "scanId": "scan-002",
+            "severity": "medium",
+            "validationLevel": 1,
+            "parameter": "Permissions-Policy",
+            "method": "GET",
+            "impact": "",
+            "ownerHint": "",
+            "firstSeen": "2026-09-28T12:11:26.777385+00:00",
+            "evidence": {
+              "response_headers": "Access-Control-Allow-Origin: *\nX-Content-Type-Options: nosniff\nX-Frame-Options: SAMEORIGIN\nFeature-Policy: payment 'self'\nX-Recruiting: /#/jobs\nContent-Type: text/html; charset=utf-8\nVary: Accept-Encoding\nDate: Mon, 28 Sep 2026 12:11:24 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\nTransfer-Encoding: chunked"
+            }
+          },
+          "relatedLocations": [
+            {
+              "id": 1,
+              "message": {
+                "text": "Evidence"
+              },
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000/rest/basket/1"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "HEADERS-001",
+          "level": "warning",
+          "message": {
+            "text": "Missing header: Content-Security-Policy\n\nURL: http://localhost:3000/rest/products/1/reviews\nParameter: Content-Security-Policy\n\nReproduction:\n\n\nRemediation:\nAdd a Content-Security-Policy header to restrict resource loading. Start with 'default-src \\'self\\''. Ref: https://owasp.org/www-project-secure-headers/"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000/rest/products/1/reviews"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "properties": {
+            "findingId": "FIND-0021",
+            "scanId": "scan-002",
+            "severity": "medium",
+            "validationLevel": 1,
+            "parameter": "Content-Security-Policy",
+            "method": "GET",
+            "impact": "",
+            "ownerHint": "",
+            "firstSeen": "2026-09-28T12:11:26.777390+00:00",
+            "evidence": {
+              "response_headers": "Access-Control-Allow-Origin: *\nX-Content-Type-Options: nosniff\nX-Frame-Options: SAMEORIGIN\nFeature-Policy: payment 'self'\nX-Recruiting: /#/jobs\nContent-Type: application/json; charset=utf-8\nContent-Length: 395\nETag: W/\"18b-ZjCwxb1HLmKT8OUcOB5nb8+F9Uk\"\nVary: Accept-Encoding\nDate: Mon, 28 Sep 2026 12:11:24 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5"
+            }
+          },
+          "relatedLocations": [
+            {
+              "id": 1,
+              "message": {
+                "text": "Evidence"
+              },
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000/rest/products/1/reviews"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "HEADERS-001",
+          "level": "warning",
+          "message": {
+            "text": "Missing header: Strict-Transport-Security\n\nURL: http://localhost:3000/rest/products/1/reviews\nParameter: Strict-Transport-Security\n\nReproduction:\n\n\nRemediation:\nAdd 'Strict-Transport-Security: max-age=31536000; includeSubDomains' to enforce HTTPS."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000/rest/products/1/reviews"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "properties": {
+            "findingId": "FIND-0022",
+            "scanId": "scan-002",
+            "severity": "medium",
+            "validationLevel": 1,
+            "parameter": "Strict-Transport-Security",
+            "method": "GET",
+            "impact": "",
+            "ownerHint": "",
+            "firstSeen": "2026-09-28T12:11:26.777397+00:00",
+            "evidence": {
+              "response_headers": "Access-Control-Allow-Origin: *\nX-Content-Type-Options: nosniff\nX-Frame-Options: SAMEORIGIN\nFeature-Policy: payment 'self'\nX-Recruiting: /#/jobs\nContent-Type: application/json; charset=utf-8\nContent-Length: 395\nETag: W/\"18b-ZjCwxb1HLmKT8OUcOB5nb8+F9Uk\"\nVary: Accept-Encoding\nDate: Mon, 28 Sep 2026 12:11:24 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5"
+            }
+          },
+          "relatedLocations": [
+            {
+              "id": 1,
+              "message": {
+                "text": "Evidence"
+              },
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000/rest/products/1/reviews"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "HEADERS-001",
+          "level": "warning",
+          "message": {
+            "text": "Missing header: Referrer-Policy\n\nURL: http://localhost:3000/rest/products/1/reviews\nParameter: Referrer-Policy\n\nReproduction:\n\n\nRemediation:\nAdd 'Referrer-Policy: no-referrer' or 'strict-origin-when-cross-origin'."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000/rest/products/1/reviews"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "properties": {
+            "findingId": "FIND-0023",
+            "scanId": "scan-002",
+            "severity": "medium",
+            "validationLevel": 1,
+            "parameter": "Referrer-Policy",
+            "method": "GET",
+            "impact": "",
+            "ownerHint": "",
+            "firstSeen": "2026-09-28T12:11:26.777402+00:00",
+            "evidence": {
+              "response_headers": "Access-Control-Allow-Origin: *\nX-Content-Type-Options: nosniff\nX-Frame-Options: SAMEORIGIN\nFeature-Policy: payment 'self'\nX-Recruiting: /#/jobs\nContent-Type: application/json; charset=utf-8\nContent-Length: 395\nETag: W/\"18b-ZjCwxb1HLmKT8OUcOB5nb8+F9Uk\"\nVary: Accept-Encoding\nDate: Mon, 28 Sep 2026 12:11:24 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5"
+            }
+          },
+          "relatedLocations": [
+            {
+              "id": 1,
+              "message": {
+                "text": "Evidence"
+              },
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000/rest/products/1/reviews"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "HEADERS-001",
+          "level": "warning",
+          "message": {
+            "text": "Missing header: Permissions-Policy\n\nURL: http://localhost:3000/rest/products/1/reviews\nParameter: Permissions-Policy\n\nReproduction:\n\n\nRemediation:\nAdd a Permissions-Policy header to restrict browser feature access."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000/rest/products/1/reviews"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "properties": {
+            "findingId": "FIND-0024",
+            "scanId": "scan-002",
+            "severity": "medium",
+            "validationLevel": 1,
+            "parameter": "Permissions-Policy",
+            "method": "GET",
+            "impact": "",
+            "ownerHint": "",
+            "firstSeen": "2026-09-28T12:11:26.777408+00:00",
+            "evidence": {
+              "response_headers": "Access-Control-Allow-Origin: *\nX-Content-Type-Options: nosniff\nX-Frame-Options: SAMEORIGIN\nFeature-Policy: payment 'self'\nX-Recruiting: /#/jobs\nContent-Type: application/json; charset=utf-8\nContent-Length: 395\nETag: W/\"18b-ZjCwxb1HLmKT8OUcOB5nb8+F9Uk\"\nVary: Accept-Encoding\nDate: Mon, 28 Sep 2026 12:11:24 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5"
+            }
+          },
+          "relatedLocations": [
+            {
+              "id": 1,
+              "message": {
+                "text": "Evidence"
+              },
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000/rest/products/1/reviews"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "HEADERS-001",
+          "level": "warning",
+          "message": {
+            "text": "Missing header: Content-Security-Policy\n\nURL: http://localhost:3000/assets/public/favicon_js.ico\nParameter: Content-Security-Policy\n\nReproduction:\n\n\nRemediation:\nAdd a Content-Security-Policy header to restrict resource loading. Start with 'default-src \\'self\\''. Ref: https://owasp.org/www-project-secure-headers/"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000/assets/public/favicon_js.ico"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "properties": {
+            "findingId": "FIND-0025",
+            "scanId": "scan-002",
+            "severity": "medium",
+            "validationLevel": 1,
+            "parameter": "Content-Security-Policy",
+            "method": "GET",
+            "impact": "",
+            "ownerHint": "",
+            "firstSeen": "2026-09-28T12:11:26.777414+00:00",
+            "evidence": {
+              "response_headers": "Access-Control-Allow-Origin: *\nX-Content-Type-Options: nosniff\nX-Frame-Options: SAMEORIGIN\nFeature-Policy: payment 'self'\nX-Recruiting: /#/jobs\nAccept-Ranges: bytes\nCache-Control: public, max-age=0\nLast-Modified: Tue, 11 Aug 2026 05:21:02 GMT\nETag: W/\"3aee-19fef445a30\"\nContent-Type: image/x-icon\nVary: Accept-Encoding\nContent-Encoding: gzip\nDate: Mon, 28 Sep 2026 12:11:24 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\nTransfer-Encoding: chunked"
+            }
+          },
+          "relatedLocations": [
+            {
+              "id": 1,
+              "message": {
+                "text": "Evidence"
+              },
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000/assets/public/favicon_js.ico"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "HEADERS-001",
+          "level": "warning",
+          "message": {
+            "text": "Missing header: Strict-Transport-Security\n\nURL: http://localhost:3000/assets/public/favicon_js.ico\nParameter: Strict-Transport-Security\n\nReproduction:\n\n\nRemediation:\nAdd 'Strict-Transport-Security: max-age=31536000; includeSubDomains' to enforce HTTPS."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000/assets/public/favicon_js.ico"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "properties": {
+            "findingId": "FIND-0026",
+            "scanId": "scan-002",
+            "severity": "medium",
+            "validationLevel": 1,
+            "parameter": "Strict-Transport-Security",
+            "method": "GET",
+            "impact": "",
+            "ownerHint": "",
+            "firstSeen": "2026-09-28T12:11:26.777419+00:00",
+            "evidence": {
+              "response_headers": "Access-Control-Allow-Origin: *\nX-Content-Type-Options: nosniff\nX-Frame-Options: SAMEORIGIN\nFeature-Policy: payment 'self'\nX-Recruiting: /#/jobs\nAccept-Ranges: bytes\nCache-Control: public, max-age=0\nLast-Modified: Tue, 11 Aug 2026 05:21:02 GMT\nETag: W/\"3aee-19fef445a30\"\nContent-Type: image/x-icon\nVary: Accept-Encoding\nContent-Encoding: gzip\nDate: Mon, 28 Sep 2026 12:11:24 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\nTransfer-Encoding: chunked"
+            }
+          },
+          "relatedLocations": [
+            {
+              "id": 1,
+              "message": {
+                "text": "Evidence"
+              },
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000/assets/public/favicon_js.ico"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "HEADERS-001",
+          "level": "warning",
+          "message": {
+            "text": "Missing header: Referrer-Policy\n\nURL: http://localhost:3000/assets/public/favicon_js.ico\nParameter: Referrer-Policy\n\nReproduction:\n\n\nRemediation:\nAdd 'Referrer-Policy: no-referrer' or 'strict-origin-when-cross-origin'."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000/assets/public/favicon_js.ico"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "properties": {
+            "findingId": "FIND-0027",
+            "scanId": "scan-002",
+            "severity": "medium",
+            "validationLevel": 1,
+            "parameter": "Referrer-Policy",
+            "method": "GET",
+            "impact": "",
+            "ownerHint": "",
+            "firstSeen": "2026-09-28T12:11:26.777424+00:00",
+            "evidence": {
+              "response_headers": "Access-Control-Allow-Origin: *\nX-Content-Type-Options: nosniff\nX-Frame-Options: SAMEORIGIN\nFeature-Policy: payment 'self'\nX-Recruiting: /#/jobs\nAccept-Ranges: bytes\nCache-Control: public, max-age=0\nLast-Modified: Tue, 11 Aug 2026 05:21:02 GMT\nETag: W/\"3aee-19fef445a30\"\nContent-Type: image/x-icon\nVary: Accept-Encoding\nContent-Encoding: gzip\nDate: Mon, 28 Sep 2026 12:11:24 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\nTransfer-Encoding: chunked"
+            }
+          },
+          "relatedLocations": [
+            {
+              "id": 1,
+              "message": {
+                "text": "Evidence"
+              },
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000/assets/public/favicon_js.ico"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "HEADERS-001",
+          "level": "warning",
+          "message": {
+            "text": "Missing header: Permissions-Policy\n\nURL: http://localhost:3000/assets/public/favicon_js.ico\nParameter: Permissions-Policy\n\nReproduction:\n\n\nRemediation:\nAdd a Permissions-Policy header to restrict browser feature access."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000/assets/public/favicon_js.ico"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "properties": {
+            "findingId": "FIND-0028",
+            "scanId": "scan-002",
+            "severity": "medium",
+            "validationLevel": 1,
+            "parameter": "Permissions-Policy",
+            "method": "GET",
+            "impact": "",
+            "ownerHint": "",
+            "firstSeen": "2026-09-28T12:11:26.777430+00:00",
+            "evidence": {
+              "response_headers": "Access-Control-Allow-Origin: *\nX-Content-Type-Options: nosniff\nX-Frame-Options: SAMEORIGIN\nFeature-Policy: payment 'self'\nX-Recruiting: /#/jobs\nAccept-Ranges: bytes\nCache-Control: public, max-age=0\nLast-Modified: Tue, 11 Aug 2026 05:21:02 GMT\nETag: W/\"3aee-19fef445a30\"\nContent-Type: image/x-icon\nVary: Accept-Encoding\nContent-Encoding: gzip\nDate: Mon, 28 Sep 2026 12:11:24 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\nTransfer-Encoding: chunked"
+            }
+          },
+          "relatedLocations": [
+            {
+              "id": 1,
+              "message": {
+                "text": "Evidence"
+              },
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000/assets/public/favicon_js.ico"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "HEADERS-001",
+          "level": "warning",
+          "message": {
+            "text": "Missing header: Content-Security-Policy\n\nURL: http://localhost:3000/styles.css\nParameter: Content-Security-Policy\n\nReproduction:\n\n\nRemediation:\nAdd a Content-Security-Policy header to restrict resource loading. Start with 'default-src \\'self\\''. Ref: https://owasp.org/www-project-secure-headers/"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000/styles.css"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "properties": {
+            "findingId": "FIND-0029",
+            "scanId": "scan-002",
+            "severity": "medium",
+            "validationLevel": 1,
+            "parameter": "Content-Security-Policy",
+            "method": "GET",
+            "impact": "",
+            "ownerHint": "",
+            "firstSeen": "2026-09-28T12:11:26.777436+00:00",
+            "evidence": {
+              "response_headers": "Access-Control-Allow-Origin: *\nX-Content-Type-Options: nosniff\nX-Frame-Options: SAMEORIGIN\nFeature-Policy: payment 'self'\nX-Recruiting: /#/jobs\nAccept-Ranges: bytes\nCache-Control: public, max-age=0\nLast-Modified: Tue, 11 Aug 2026 05:36:06 GMT\nETag: W/\"24f14-19fef522570\"\nContent-Type: text/css; charset=UTF-8\nVary: Accept-Encoding\nContent-Encoding: gzip\nDate: Mon, 28 Sep 2026 12:11:24 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\nTransfer-Encoding: chunked"
+            }
+          },
+          "relatedLocations": [
+            {
+              "id": 1,
+              "message": {
+                "text": "Evidence"
+              },
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000/styles.css"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "HEADERS-001",
+          "level": "warning",
+          "message": {
+            "text": "Missing header: Strict-Transport-Security\n\nURL: http://localhost:3000/styles.css\nParameter: Strict-Transport-Security\n\nReproduction:\n\n\nRemediation:\nAdd 'Strict-Transport-Security: max-age=31536000; includeSubDomains' to enforce HTTPS."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000/styles.css"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "properties": {
+            "findingId": "FIND-0030",
+            "scanId": "scan-002",
+            "severity": "medium",
+            "validationLevel": 1,
+            "parameter": "Strict-Transport-Security",
+            "method": "GET",
+            "impact": "",
+            "ownerHint": "",
+            "firstSeen": "2026-09-28T12:11:26.777441+00:00",
+            "evidence": {
+              "response_headers": "Access-Control-Allow-Origin: *\nX-Content-Type-Options: nosniff\nX-Frame-Options: SAMEORIGIN\nFeature-Policy: payment 'self'\nX-Recruiting: /#/jobs\nAccept-Ranges: bytes\nCache-Control: public, max-age=0\nLast-Modified: Tue, 11 Aug 2026 05:36:06 GMT\nETag: W/\"24f14-19fef522570\"\nContent-Type: text/css; charset=UTF-8\nVary: Accept-Encoding\nContent-Encoding: gzip\nDate: Mon, 28 Sep 2026 12:11:24 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\nTransfer-Encoding: chunked"
+            }
+          },
+          "relatedLocations": [
+            {
+              "id": 1,
+              "message": {
+                "text": "Evidence"
+              },
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000/styles.css"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "HEADERS-001",
+          "level": "warning",
+          "message": {
+            "text": "Missing header: Referrer-Policy\n\nURL: http://localhost:3000/styles.css\nParameter: Referrer-Policy\n\nReproduction:\n\n\nRemediation:\nAdd 'Referrer-Policy: no-referrer' or 'strict-origin-when-cross-origin'."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000/styles.css"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "properties": {
+            "findingId": "FIND-0031",
+            "scanId": "scan-002",
+            "severity": "medium",
+            "validationLevel": 1,
+            "parameter": "Referrer-Policy",
+            "method": "GET",
+            "impact": "",
+            "ownerHint": "",
+            "firstSeen": "2026-09-28T12:11:26.777446+00:00",
+            "evidence": {
+              "response_headers": "Access-Control-Allow-Origin: *\nX-Content-Type-Options: nosniff\nX-Frame-Options: SAMEORIGIN\nFeature-Policy: payment 'self'\nX-Recruiting: /#/jobs\nAccept-Ranges: bytes\nCache-Control: public, max-age=0\nLast-Modified: Tue, 11 Aug 2026 05:36:06 GMT\nETag: W/\"24f14-19fef522570\"\nContent-Type: text/css; charset=UTF-8\nVary: Accept-Encoding\nContent-Encoding: gzip\nDate: Mon, 28 Sep 2026 12:11:24 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\nTransfer-Encoding: chunked"
+            }
+          },
+          "relatedLocations": [
+            {
+              "id": 1,
+              "message": {
+                "text": "Evidence"
+              },
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000/styles.css"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "HEADERS-001",
+          "level": "warning",
+          "message": {
+            "text": "Missing header: Permissions-Policy\n\nURL: http://localhost:3000/styles.css\nParameter: Permissions-Policy\n\nReproduction:\n\n\nRemediation:\nAdd a Permissions-Policy header to restrict browser feature access."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000/styles.css"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "properties": {
+            "findingId": "FIND-0032",
+            "scanId": "scan-002",
+            "severity": "medium",
+            "validationLevel": 1,
+            "parameter": "Permissions-Policy",
+            "method": "GET",
+            "impact": "",
+            "ownerHint": "",
+            "firstSeen": "2026-09-28T12:11:26.777452+00:00",
+            "evidence": {
+              "response_headers": "Access-Control-Allow-Origin: *\nX-Content-Type-Options: nosniff\nX-Frame-Options: SAMEORIGIN\nFeature-Policy: payment 'self'\nX-Recruiting: /#/jobs\nAccept-Ranges: bytes\nCache-Control: public, max-age=0\nLast-Modified: Tue, 11 Aug 2026 05:36:06 GMT\nETag: W/\"24f14-19fef522570\"\nContent-Type: text/css; charset=UTF-8\nVary: Accept-Encoding\nContent-Encoding: gzip\nDate: Mon, 28 Sep 2026 12:11:24 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\nTransfer-Encoding: chunked"
+            }
+          },
+          "relatedLocations": [
+            {
+              "id": 1,
+              "message": {
+                "text": "Evidence"
+              },
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000/styles.css"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "SENSINFO-001",
+          "level": "note",
+          "message": {
+            "text": "HTML comment with potentially sensitive content\n\nURL: http://localhost:3000\nParameter: N/A\n\nReproduction:\ncurl 'http://localhost:3000'  # inspect the response body\n\nRemediation:\nReview and remove HTML comments containing internal paths, version numbers, or developer notes before deploying to production."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "properties": {
+            "findingId": "FIND-0033",
+            "scanId": "scan-002",
+            "severity": "low",
+            "validationLevel": 1,
+            "parameter": null,
+            "method": "GET",
+            "impact": "Exposed internal information assists attackers in targeting further attacks with knowledge of technology stack, credentials, or paths.",
+            "ownerHint": "",
+            "firstSeen": "2026-09-28T12:11:26.777457+00:00",
+            "evidence": {
+              "matched_pattern": "(?i)(<!--.*?--\\s*>)",
+              "response_excerpt": "<!--\n  ~ Copyright (c) 2014-2026 Bjoern Kimminich & the OWASP Juice Shop contributors.\n  ~ SPDX-License-Identifier: MIT\n  -->\n\n<!doctype html>\n<html lang=\"en\" data-beasties-container>\n<head>\n  <meta charset=\"utf-8\">\n  <title>OWASP Juice Shop</title>\n  <meta name=\"description"
+            }
+          },
+          "relatedLocations": [
+            {
+              "id": 1,
+              "message": {
+                "text": "Evidence"
+              },
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "SENSINFO-001",
+          "level": "warning",
+          "message": {
+            "text": "Stack trace / exception detail exposed\n\nURL: http://localhost:3000/api/Users/?name=test\nParameter: N/A\n\nReproduction:\ncurl 'http://localhost:3000/api/Users/?name=test'  # inspect the response body\n\nRemediation:\nSuppress detailed error messages in production. Return a generic error page instead. Configure your framework's error handling to hide internal paths and class names."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000/api/Users/?name=test"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "properties": {
+            "findingId": "FIND-0034",
+            "scanId": "scan-002",
+            "severity": "medium",
+            "validationLevel": 1,
+            "parameter": null,
+            "method": "GET",
+            "impact": "Exposed internal information assists attackers in targeting further attacks with knowledge of technology stack, credentials, or paths.",
+            "ownerHint": "",
+            "firstSeen": "2026-09-28T12:11:26.777465+00:00",
+            "evidence": {
+              "matched_pattern": "(?i)(stack\\s*trace|traceback\\s*\\(most\\s*recent|at\\s+\\w[\\w.]+\\.\\w+\\([\\w.]+:\\d+\\))",
+              "response_excerpt": "3434;\n}\nh1 em, h2 em {\n  padding: 0 5px;\n  font-weight: normal;\n}\nh1 {\n  font-size: 60px;\n}\nh2 {\n  margin-top: 10px;\n}\nul li {\n  list-style: none;\n}\n#stacktrace {\n  margin-left: 60px;\n}\n</style>\n  </head>\n  <body>\n    <div id=\"wrapper\">\n      <h1>OWASP Juice Shop (Express ^4.22.1)</h1>\n      <h2><em>401</em> "
+            }
+          },
+          "relatedLocations": [
+            {
+              "id": 1,
+              "message": {
+                "text": "Evidence"
+              },
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000/api/Users/?name=test"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "SENSINFO-001",
+          "level": "warning",
+          "message": {
+            "text": "Stack trace / exception detail exposed\n\nURL: http://localhost:3000/rest/user/login\nParameter: N/A\n\nReproduction:\ncurl 'http://localhost:3000/rest/user/login'  # inspect the response body\n\nRemediation:\nSuppress detailed error messages in production. Return a generic error page instead. Configure your framework's error handling to hide internal paths and class names."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000/rest/user/login"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "properties": {
+            "findingId": "FIND-0035",
+            "scanId": "scan-002",
+            "severity": "medium",
+            "validationLevel": 1,
+            "parameter": null,
+            "method": "GET",
+            "impact": "Exposed internal information assists attackers in targeting further attacks with knowledge of technology stack, credentials, or paths.",
+            "ownerHint": "",
+            "firstSeen": "2026-09-28T12:11:26.777472+00:00",
+            "evidence": {
+              "matched_pattern": "(?i)(stack\\s*trace|traceback\\s*\\(most\\s*recent|at\\s+\\w[\\w.]+\\.\\w+\\([\\w.]+:\\d+\\))",
+              "response_excerpt": "3434;\n}\nh1 em, h2 em {\n  padding: 0 5px;\n  font-weight: normal;\n}\nh1 {\n  font-size: 60px;\n}\nh2 {\n  margin-top: 10px;\n}\nul li {\n  list-style: none;\n}\n#stacktrace {\n  margin-left: 60px;\n}\n</style>\n  </head>\n  <body>\n    <div id=\"wrapper\">\n      <h1>OWASP Juice Shop (Express ^4.22.1)</h1>\n      <h2><em>500</em> "
+            }
+          },
+          "relatedLocations": [
+            {
+              "id": 1,
+              "message": {
+                "text": "Evidence"
+              },
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000/rest/user/login"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "SENSINFO-001",
+          "level": "warning",
+          "message": {
+            "text": "Stack trace / exception detail exposed\n\nURL: http://localhost:3000/rest/basket/1\nParameter: N/A\n\nReproduction:\ncurl 'http://localhost:3000/rest/basket/1'  # inspect the response body\n\nRemediation:\nSuppress detailed error messages in production. Return a generic error page instead. Configure your framework's error handling to hide internal paths and class names."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000/rest/basket/1"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "properties": {
+            "findingId": "FIND-0036",
+            "scanId": "scan-002",
+            "severity": "medium",
+            "validationLevel": 1,
+            "parameter": null,
+            "method": "GET",
+            "impact": "Exposed internal information assists attackers in targeting further attacks with knowledge of technology stack, credentials, or paths.",
+            "ownerHint": "",
+            "firstSeen": "2026-09-28T12:11:26.777477+00:00",
+            "evidence": {
+              "matched_pattern": "(?i)(stack\\s*trace|traceback\\s*\\(most\\s*recent|at\\s+\\w[\\w.]+\\.\\w+\\([\\w.]+:\\d+\\))",
+              "response_excerpt": "3434;\n}\nh1 em, h2 em {\n  padding: 0 5px;\n  font-weight: normal;\n}\nh1 {\n  font-size: 60px;\n}\nh2 {\n  margin-top: 10px;\n}\nul li {\n  list-style: none;\n}\n#stacktrace {\n  margin-left: 60px;\n}\n</style>\n  </head>\n  <body>\n    <div id=\"wrapper\">\n      <h1>OWASP Juice Shop (Express ^4.22.1)</h1>\n      <h2><em>401</em> "
+            }
+          },
+          "relatedLocations": [
+            {
+              "id": 1,
+              "message": {
+                "text": "Evidence"
+              },
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "http://localhost:3000/rest/basket/1"
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "properties": {
+        "scanId": "scan-002",
+        "target": "http://localhost:3000",
+        "startedAt": "2026-09-28T12:11:23.508716+00:00",
+        "finishedAt": "2026-09-28T12:11:26.777636+00:00",
+        "urlsCrawled": 8,
+        "fingerprint": {
+          "server": null,
+          "language": null,
+          "framework": null,
+          "cms": "",
+          "js_libs": [],
+          "raw_tags": {
+            "x-generator": ""
+          }
+        }
+      }
+    }
+  ]
+}
