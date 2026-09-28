@@ -1,4 +1,4 @@
-1. Problem Statement
+#Problem Statement
 How might we enable a developer or site operator with no security background to run a safe, controlled, low-false-positive security check on their own website within 30 minutes — and get an actionable, CI-ready result instead of a 300-page PDF nobody reads?
 2. Background
 2.1 The threat is real
